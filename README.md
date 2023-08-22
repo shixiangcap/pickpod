@@ -43,7 +43,7 @@ Compared to the personal open-source prototype in this repository, the commercia
 
 ## Background
 
-<img src="https://github.com/shixiangcap/pickpod/assets/" width=50%/>
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/4ffe3447-02bf-4474-be81-a5912e240e4c" width=100%/>
 
 The goals for **`Pickpod`** are:
 
@@ -214,15 +214,17 @@ pickpod_task.audio_doc.save_as_json()
 
 ### Modification of user configuration and task options
 
-<img src="https://github.com/shixiangcap/pickpod/assets/" width=50%/>
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/f4381862-c02a-4da4-ab94-84ecb1271115" width=100%/>
 
-<img src="https://github.com/shixiangcap/pickpod/assets/" width=50%/>
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/1b40c2e4-b0f3-4833-ac60-5183bc53208d" width=100%/>
+
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/776e803b-9546-4f84-8a6e-1df6dad39fc3" width=100%/>
 
 ### A **`Pickpod`** task returning results continuously during execution
 
-<img src="https://github.com/shixiangcap/pickpod/assets/" width=50%/>
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/2dd3f72f-d35c-489f-9733-1262c3b5dbba" width=100%/>
 
-<img src="https://github.com/shixiangcap/pickpod/assets/" width=50%/>
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/22cbb191-57a6-43ad-bb8b-1547411c5582" width=100%/>
 
 ### A complete transcription result of a audio file
 
