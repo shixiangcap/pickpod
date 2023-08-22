@@ -14,7 +14,7 @@ from pickpod.doc import AudioDocument
 from pickpod.utils import PickpodUtils
 
 
-def my_pickpod_whisper(audio_doc: AudioDocument, task_language: str | None, task_prompt: str | None, task_queue: Queue = None) -> None:
+def my_pickpod_whisper(audio_doc: AudioDocument, task_language: str = None, task_prompt: str = None, task_queue: Queue = None) -> None:
     task_language, task_probability = PickpodUtils.pickpod_whisper(audio_doc, task_language, task_prompt, task_queue)
     task_queue.put(None)
     task_queue.put((task_language, task_probability))

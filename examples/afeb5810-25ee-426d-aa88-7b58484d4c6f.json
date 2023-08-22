@@ -1,0 +1,529 @@
+{
+    "uuid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+    "title": "Introducing GPT-4",
+    "ext": "m4a",
+    "web": "https://www.youtube.com/watch?v=--khbXchTeE",
+    "url": "https://www.youtube.com/watch?v=--khbXchTeE",
+    "length": 192.493,
+    "description": "GPT-4 is OpenAI’s most advanced system, producing safer and more useful responses.\n\nhttps://openai.com/product/gpt-4",
+    "keywords": [
+        "GPT-4",
+        "AI capabilities",
+        "Education",
+        "Microsoft partnership",
+        "Safety",
+        "Usefulness",
+        "Early adopters",
+        "Transistor",
+        "Programming languages",
+        "Future generations"
+    ],
+    "path": "/opt/pickpod/app/library/audio/afeb5810-25ee-426d-aa88-7b58484d4c6f.m4a",
+    "sentence": [
+        {
+            "start": 0.0,
+            "end": 4.88,
+            "content": "GPT-4 takes what you prompt it with and just runs with it.",
+            "speaker": 7
+        },
+        {
+            "start": 4.88,
+            "end": 6.54,
+            "content": "From one perspective, it's a tool,",
+            "speaker": 7
+        },
+        {
+            "start": 6.54,
+            "end": 11.84,
+            "content": "a thing you can use to get useful tasks done in language.",
+            "speaker": 7
+        },
+        {
+            "start": 11.84,
+            "end": 13.5,
+            "content": "From another perspective, it's a system",
+            "speaker": 7
+        },
+        {
+            "start": 13.5,
+            "end": 17.04,
+            "content": "that can make dreams, thoughts, ideas flourish",
+            "speaker": 7
+        },
+        {
+            "start": 17.04,
+            "end": 19.080000000000002,
+            "content": "in text in front of you.",
+            "speaker": 7
+        },
+        {
+            "start": 19.080000000000002,
+            "end": 23.2,
+            "content": "GPT-4 is incredibly advanced and sophisticated.",
+            "speaker": 6
+        },
+        {
+            "start": 23.2,
+            "end": 27.96,
+            "content": "It can take in and generate up to 25,000 words of text,",
+            "speaker": 6
+        },
+        {
+            "start": 28.0,
+            "end": 31.200000000000003,
+            "content": "around eight times more than chat GPT.",
+            "speaker": 6
+        },
+        {
+            "start": 31.200000000000003,
+            "end": 34.0,
+            "content": "It understands images and can express",
+            "speaker": 6
+        },
+        {
+            "start": 34.0,
+            "end": 36.0,
+            "content": "logical ideas about them.",
+            "speaker": 6
+        },
+        {
+            "start": 36.0,
+            "end": 38.2,
+            "content": "For example, it can tell us that",
+            "speaker": 6
+        },
+        {
+            "start": 38.2,
+            "end": 40.120000000000005,
+            "content": "if the strings in this image were cut,",
+            "speaker": 6
+        },
+        {
+            "start": 40.120000000000005,
+            "end": 42.08,
+            "content": "the balloons would fly away.",
+            "speaker": 6
+        },
+        {
+            "start": 42.08,
+            "end": 44.760000000000005,
+            "content": "This is the place where you just get turbocharged",
+            "speaker": 4
+        },
+        {
+            "start": 44.760000000000005,
+            "end": 46.24,
+            "content": "by these AIs.",
+            "speaker": 4
+        },
+        {
+            "start": 46.24,
+            "end": 47.56,
+            "content": "They're not perfect, they make mistakes,",
+            "speaker": 4
+        },
+        {
+            "start": 47.56,
+            "end": 49.480000000000004,
+            "content": "and so you really need to make sure that you know",
+            "speaker": 4
+        },
+        {
+            "start": 49.480000000000004,
+            "end": 52.400000000000006,
+            "content": "the work is being done to your level of expectation.",
+            "speaker": 4
+        },
+        {
+            "start": 52.400000000000006,
+            "end": 55.040000000000006,
+            "content": "But I think that it is fundamentally about",
+            "speaker": 4
+        },
+        {
+            "start": 55.040000000000006,
+            "end": 57.2,
+            "content": "amplifying what every person is able to do.",
+            "speaker": 4
+        },
+        {
+            "start": 58.04,
+            "end": 60.84,
+            "content": "GPT-4 training finished last August,",
+            "speaker": 1
+        },
+        {
+            "start": 60.84,
+            "end": 63.56,
+            "content": "and everything that's been happening in the past few months,",
+            "speaker": 1
+        },
+        {
+            "start": 63.56,
+            "end": 64.84,
+            "content": "up until we've released it,",
+            "speaker": 1
+        },
+        {
+            "start": 64.84,
+            "end": 67.16,
+            "content": "has been a giant sprint to make it safer,",
+            "speaker": 1
+        },
+        {
+            "start": 67.16,
+            "end": 69.16,
+            "content": "more aligned, and also more useful.",
+            "speaker": 1
+        },
+        {
+            "start": 69.16,
+            "end": 72.84,
+            "content": "We have put in already a lot of internal guardrails",
+            "speaker": 1
+        },
+        {
+            "start": 72.84,
+            "end": 75.24000000000001,
+            "content": "around things like adversarial usage,",
+            "speaker": 1
+        },
+        {
+            "start": 75.24000000000001,
+            "end": 78.24000000000001,
+            "content": "unwanted content, and privacy concerns.",
+            "speaker": 1
+        },
+        {
+            "start": 78.24000000000001,
+            "end": 81.28,
+            "content": "And when we release a model, we know things are not done.",
+            "speaker": 1
+        },
+        {
+            "start": 81.28,
+            "end": 83.92,
+            "content": "We know we have to learn, we know we have to update,",
+            "speaker": 1
+        },
+        {
+            "start": 83.92,
+            "end": 87.32,
+            "content": "we know we have to keep improving all the systems around it",
+            "speaker": 1
+        },
+        {
+            "start": 87.36000000000001,
+            "end": 89.88000000000001,
+            "content": "to make it suitable for society.",
+            "speaker": 1
+        },
+        {
+            "start": 89.88000000000001,
+            "end": 93.08000000000001,
+            "content": "To me, the most compelling use cases of these technologies",
+            "speaker": 7
+        },
+        {
+            "start": 93.08000000000001,
+            "end": 96.80000000000001,
+            "content": "will come from starting with a real human need.",
+            "speaker": 7
+        },
+        {
+            "start": 96.80000000000001,
+            "end": 98.68,
+            "content": "The obvious one where these systems have",
+            "speaker": 7
+        },
+        {
+            "start": 98.68,
+            "end": 101.84,
+            "content": "really incredible potential is in education.",
+            "speaker": 7
+        },
+        {
+            "start": 101.84,
+            "end": 104.96000000000001,
+            "content": "GPT-4 can teach a huge range of subjects.",
+            "speaker": 5
+        },
+        {
+            "start": 104.96000000000001,
+            "end": 108.12,
+            "content": "Imagine giving a fifth grader a personal math tutor",
+            "speaker": 5
+        },
+        {
+            "start": 108.12,
+            "end": 110.60000000000001,
+            "content": "with unlimited time and patience.",
+            "speaker": 5
+        },
+        {
+            "start": 110.60000000000001,
+            "end": 113.24000000000001,
+            "content": "It's a great tool to bring learning to everyone",
+            "speaker": 5
+        },
+        {
+            "start": 113.24000000000001,
+            "end": 116.04,
+            "content": "in a way that is personalized to their skill level.",
+            "speaker": 5
+        },
+        {
+            "start": 117.04,
+            "end": 119.92,
+            "content": "GPT-4 brings the dream of having",
+            "speaker": 2
+        },
+        {
+            "start": 119.92,
+            "end": 122.64,
+            "content": "the most useful, helpful assistant to life.",
+            "speaker": 2
+        },
+        {
+            "start": 122.64,
+            "end": 124.52000000000001,
+            "content": "It's really about adding as much value",
+            "speaker": 2
+        },
+        {
+            "start": 124.52000000000001,
+            "end": 126.04,
+            "content": "to everyday life as possible.",
+            "speaker": 2
+        },
+        {
+            "start": 127.24000000000001,
+            "end": 129.76000000000002,
+            "content": "The partnership that OpenAI has with Microsoft",
+            "speaker": 3
+        },
+        {
+            "start": 129.76000000000002,
+            "end": 131.68,
+            "content": "is to shape this technology",
+            "speaker": 3
+        },
+        {
+            "start": 131.68,
+            "end": 134.96,
+            "content": "into something that's gonna be useful for the world.",
+            "speaker": 3
+        },
+        {
+            "start": 134.96,
+            "end": 136.56,
+            "content": "The power of AI, hopefully,",
+            "speaker": 0
+        },
+        {
+            "start": 136.56,
+            "end": 139.04000000000002,
+            "content": "is that it can help us be more productive,",
+            "speaker": 0
+        },
+        {
+            "start": 139.04000000000002,
+            "end": 141.92000000000002,
+            "content": "which ultimately leads to better quality of life.",
+            "speaker": 0
+        },
+        {
+            "start": 141.92000000000002,
+            "end": 143.28,
+            "content": "The development of the transistor",
+            "speaker": 8
+        },
+        {
+            "start": 143.28,
+            "end": 144.72,
+            "content": "of the computer of the intranet,",
+            "speaker": 8
+        },
+        {
+            "start": 144.92,
+            "end": 146.4,
+            "content": "the semiconductor industry,",
+            "speaker": 8
+        },
+        {
+            "start": 146.4,
+            "end": 147.68,
+            "content": "all the programming languages,",
+            "speaker": 8
+        },
+        {
+            "start": 147.68,
+            "end": 151.88,
+            "content": "everything came together to produce AI technology.",
+            "speaker": 8
+        },
+        {
+            "start": 151.88,
+            "end": 153.56,
+            "content": "And while it is very limited,",
+            "speaker": 8
+        },
+        {
+            "start": 153.56,
+            "end": 156.0,
+            "content": "it is already easy to imagine what the impact",
+            "speaker": 8
+        },
+        {
+            "start": 156.0,
+            "end": 159.68,
+            "content": "of a successor many generations down the line will look like.",
+            "speaker": 8
+        },
+        {
+            "start": 159.68,
+            "end": 163.2,
+            "content": "We think that GPT-4 will be the world's first experience",
+            "speaker": 6
+        },
+        {
+            "start": 163.2,
+            "end": 166.68,
+            "content": "with a highly capable and advanced AI system.",
+            "speaker": 6
+        },
+        {
+            "start": 166.68,
+            "end": 171.04,
+            "content": "So we really care about this model being useful to everyone,",
+            "speaker": 6
+        },
+        {
+            "start": 171.04,
+            "end": 173.32,
+            "content": "not just the early adopters",
+            "speaker": 6
+        },
+        {
+            "start": 173.35999999999999,
+            "end": 176.2,
+            "content": "or people very close to technology.",
+            "speaker": 6
+        },
+        {
+            "start": 176.2,
+            "end": 178.23999999999998,
+            "content": "So it is really important to us",
+            "speaker": 6
+        },
+        {
+            "start": 178.23999999999998,
+            "end": 181.28,
+            "content": "that as many people as possible participate",
+            "speaker": 6
+        },
+        {
+            "start": 181.28,
+            "end": 182.84,
+            "content": "so that we can learn more",
+            "speaker": 6
+        },
+        {
+            "start": 182.84,
+            "end": 184.84,
+            "content": "about how it can be helpful to everyone.",
+            "speaker": 6
+        }
+    ],
+    "summary": [
+        {
+            "start": 0,
+            "content": "Introducing GPT-4 and its capabilities"
+        },
+        {
+            "start": 39,
+            "content": "GPT-4 can generate long, coherent text and understand images"
+        },
+        {
+            "start": 68,
+            "content": "GPT-4 amplifies human abilities but still makes mistakes"
+        },
+        {
+            "start": 88,
+            "content": "Work done since August to make GPT-4 safer and more useful "
+        },
+        {
+            "start": 109,
+            "content": "Internal guardrails added around potential risks"
+        },
+        {
+            "start": 124,
+            "content": "Improvements will continue after release"
+        },
+        {
+            "start": 139,
+            "content": "Most compelling use cases start with human needs"
+        },
+        {
+            "start": 151,
+            "content": "Huge potential for education and personalized learning  "
+        },
+        {
+            "start": 170,
+            "content": "Can serve as a helpful unlimited assistant "
+        },
+        {
+            "start": 184,
+            "content": "Partnership with Microsoft to shape useful technology"
+        },
+        {
+            "start": 197,
+            "content": "Goal to increase productivity and quality of life"
+        },
+        {
+            "start": 211,
+            "content": "AI builds on decades of advances in computing  "
+        },
+        {
+            "start": 230,
+            "content": "GPT-4 will provide first experience of advanced AI"
+        },
+        {
+            "start": 245,
+            "content": "Important that GPT-4 benefits everyone beyond early adopters"
+        },
+        {
+            "start": 259,
+            "content": "Broad participation will maximize learning about helpful uses"
+        }
+    ],
+    "views": [
+        {
+            "content": "Here are 5 unconventional or sharp attitudes in the transcript:",
+            "mark": false
+        },
+        {
+            "content": "Calling GPT-4 \"incredibly advanced and sophisticated\" and able to generate 8 times more text than ChatGPT contradicts the view that these systems still have major limitations. ",
+            "mark": false
+        },
+        {
+            "content": "Saying GPT-4 can \"make dreams, thoughts, ideas flourish in text\" suggests it has near-human creative abilities, which is likely an overstatement.",
+            "mark": false
+        },
+        {
+            "content": "Claiming GPT-4 can be a personal math tutor with \"unlimited time and patience\" exaggerates its capabilities and usefulness in education.",
+            "mark": false
+        },
+        {
+            "content": "Stating GPT-4 brings the \"dream of the most useful, helpful assistant to life\" implies it is more capable than it likely is.",
+            "mark": false
+        },
+        {
+            "content": "Calling GPT-4 the \"world's first experience with a highly capable and advanced AI system\" disregards earlier advanced systems and oversells its abilities.",
+            "mark": false
+        }
+    ],
+    "origin": "web",
+    "ctime": 1692685244,
+    "utime": 1692685309
+}

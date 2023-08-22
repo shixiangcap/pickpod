@@ -52,7 +52,7 @@ class PickpodUtils(object):
         """
         with yt_dlp.YoutubeDL(ydl_options) as ydl:
             ydl_info = ydl.extract_info(audio_doc.url, download=True)
-            print(ydl_info)
+            # print(ydl_info)
         if not audio_doc.title:
             audio_doc.title = ydl_info.get("title", "")
         if not audio_doc.description:
@@ -67,7 +67,7 @@ class PickpodUtils(object):
             audio_doc.length = len(AudioSegment.from_file(audio_doc.path)) / 1000
 
     @staticmethod
-    def pickpod_whisper(audio_doc: AudioDocument, task_language: str | None, task_prompt: str | None, task_queue: Queue = None, model_file: str = "large-v2") -> (str, float):
+    def pickpod_whisper(audio_doc: AudioDocument, task_language: str = None, task_prompt: str = None, task_queue: Queue = None, model_file: str = "large-v2") -> (str, float):
         """
         Get audio document with faster_whisper
         """
