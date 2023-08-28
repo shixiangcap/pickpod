@@ -215,7 +215,7 @@ elif not click_save and click_do and not click_clean:
                 audio_url=podcast.get("audio", ""),
                 audio_length=podcast.get("audio_length_sec", 0),
                 audio_description=re.sub(r"<[^>]*?>", "", podcast.get("description_original", "")),
-                audio_origin="task")
+                audio_origin="定时")
             YDL_OPTIONS["outtmpl"] = f"{LIBRARY_PATH}/audio/{audio_doc.uuid}.%(ext)s"
             PickpodUtils.pickpod_ytdlp(audio_doc, YDL_OPTIONS)
             st.info(f"ℹ️ 音频文件下载完成")

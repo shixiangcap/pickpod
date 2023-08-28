@@ -120,7 +120,7 @@ def run():
 
                     st.caption("1⃣️ 存储音频文件到本地", unsafe_allow_html=False)
                     start_time = time.time()
-                    audio_doc = AudioDocument(audio_web=web_url, audio_url=web_url, audio_origin="web")
+                    audio_doc = AudioDocument(audio_web=web_url, audio_url=web_url, audio_origin="网络")
                     YDL_OPTIONS["outtmpl"] = f"{LIBRARY_PATH}/audio/{audio_doc.uuid}.%(ext)s"
                     PickpodUtils.pickpod_ytdlp(audio_doc, YDL_OPTIONS)
                     st.info(f"ℹ️ 音频文件下载完成，用时：{time.time() - start_time} 秒")
@@ -150,7 +150,7 @@ def run():
                     st.caption("1⃣️ 存储音频文件到本地", unsafe_allow_html=False)
                     start_time = time.time()
                     audio_title, audio_ext = os.path.splitext(upload_file[0])
-                    audio_doc = AudioDocument(audio_title=audio_title, audio_ext=audio_ext[1:], audio_origin="local")
+                    audio_doc = AudioDocument(audio_title=audio_title, audio_ext=audio_ext[1:], audio_origin="本地")
                     audio_doc.path = f"{LIBRARY_PATH}/audio/{audio_doc.uuid}.{audio_doc.ext}"
                     with open(audio_doc.path, "wb") as f:
                         f.write(upload_file[1])
