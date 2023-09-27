@@ -23,6 +23,7 @@ HUGGING_FACE_KEY = os.getenv("HUGGING_FACE_KEY")
 CLAUDE_KEY = os.getenv("CLAUDE_KEY")
 
 
+st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Transcribe",
     page_icon="../library/logo.png",

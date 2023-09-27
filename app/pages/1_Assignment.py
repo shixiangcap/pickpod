@@ -31,8 +31,6 @@ LISTEN_NOTE_KEY = os.getenv("LISTEN_NOTE_KEY")
 def my_pickpod_task(pickpod_list: List[PickpodTask]) -> None:
     for pickpod_task in pickpod_list:
         pickpod_task.pickpod_all_task()
-        with open(f"{LIBRARY_PATH}/index.txt", "a") as f:
-            f.write(f"{pickpod_task.audio_doc.uuid}\n")
         pickpod_task.audio_doc.save_as_json(json_path=f"{LIBRARY_PATH}/doc/{pickpod_task.audio_doc.uuid}.json")
 
 def task_set(ln_q, ln_sort_by_date=None, ln_num=None, ln_len_min=None, ln_len_max=None, ln_published_before=None, ln_published_after=None, ln_only_in=None, ln_language=None, ln_region=None, ln_safe_mode=None, ln_unique_podcasts=None, pp_start=None, pp_period=None, pp_language=None, pp_prompt=None, pp_pipeline=None, pp_keyword=None, pp_summary=None, pp_view=None) -> None:
@@ -68,6 +66,7 @@ def task_set(ln_q, ln_sort_by_date=None, ln_num=None, ln_len_min=None, ln_len_ma
     st.session_state.task_do = task_dict
 
 
+st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Assignment",
     page_icon="../library/logo.png",

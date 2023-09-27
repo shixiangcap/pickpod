@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from typing import Dict, List
 
 import requests
 
@@ -14,6 +15,8 @@ PROMPT_SUMMARY_ZH = "Human:从视频文本中创建不超过30个关键时刻，
 PROMPT_SUMMARY_EN = "Human:Create no more than 30 key moments from the video text, including the time, your answer should be concise and start with 00:00:00, your answer must be translated into English.\n\nAssistant:Sure, I konw the rule. I'll create key moments from the recived text including the time in English.\n\nHuman:TEXT: \"Hello everyone, this is phase 5 of the Ladder Project. We created the Ladder Project as a platform for sincere discussion and in-depth analysis of key issues in the crypto ecosystem. By the way, I'm Frank Lee, a DeFi and smart contract security practitioner.\"\n\nAssistant:00:00:00 - Introducing the Program\n\nHuman:TEXT: \"{}\"\n\nAssistant:"
 PROMPT_VIEWS_ZH = "Human:用中文回答文中有哪些反常识或者有尖锐态度的新观点？请输出7~8个，并说明和常识不一致的具体原因。\n\nAssistant:好的，我明白要求和输出的格式了，请给我具体的文字。\n\nHuman:文本：\"{}\"\n\nAssistant:"
 PROMPT_VIEWS_EN = "Human:What unconventional or sharp attitudes are there in the following transcript? List the five most important ones and explain why they contradict the consensus. The language you respond in must be consistent with the language of the transcript. The text is as follows: \"{}\"\n\nAssistant:"
+PROMPT_RECOMMEND_NONE = "Human:请对以下{}段不同的音频文本进行排序。对于表达的观点越新颖、尖锐、反常识的音频文本，它的排序结果应当越靠前，我越有可能收听。你可以直接输出一串代表推荐顺序的阿拉伯数字，不用附加额外说明。\n\nAssistant:好的，我明白要求和输出的格式了，请给我具体的文字。\n\nHuman:音频文本：\"{}\"\n\nAssistant:"
+PROMPT_RECOMMEND_WIKI = "Human:请对以下{}段不同的音频文本进行排序，我将分别提供一系列我感兴趣和不感兴趣的观点由于参考。对于表达的观点符合我的情趣，且越新颖、尖锐、反常识的音频文本，它的排序结果应当越靠前，我越有可能收听；反之对于表达的观点令我不感兴趣，或平庸并已经成为常识的音频文本，它的排序应当靠后，我不会收听。你可以直接输出一串代表推荐顺序的阿拉伯数字，不用附加额外说明。\n\nAssistant:好的，我明白要求和输出的格式了，请给我具体的文字。\n\nHuman:我感兴趣的观点：\"{}\"\n\n我不感兴趣的观点：\"{}\"\n\n音频文本：\"{}\"\n\nAssistant:"
 
 
 def t2s(t: str = "") -> int:
@@ -96,3 +99,33 @@ class ClaudeClient(object):
             for x in claude_views.split("\n")
             if x
         ]
+
+    def get_recommend_none(self, doc_list: List[str] = list()):
+        self.body["prompt"] = PROMPT_RECOMMEND_NONE.format(
+            len(doc_list),
+            "\n\n".join([f"第{x + 1}篇音频文本: {y}" for x, y in enumerate(doc_list)])
+        )
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_sort = claude_response.json().get("completion", "")
+        print(claude_sort)
+        claude_sort = [max(int(x.strip()) - 1, 0) for x in re.findall(r"\s\d+|\d+\s", claude_sort) if int(x.strip()) <= len(doc_list)]
+        claude_sort = sorted(set(claude_sort), key=claude_sort.index)
+        claude_sort.extend(list(set([x for x in range(len(doc_list))]) - set(claude_sort)))
+        print(claude_sort)
+        return claude_sort
+
+    def get_recommend_wiki(self, doc_list: List[str] = list(), view_dict: Dict[bool, List[str]] = dict()):
+        self.body["prompt"] = PROMPT_RECOMMEND_WIKI.format(
+            len(doc_list),
+            "\n\n".join([f"观点{x + 1}: {y}" for x, y in enumerate(view_dict[True])]),
+            "\n\n".join([f"观点{x + 1}: {y}" for x, y in enumerate(view_dict[False])]),
+            "\n\n".join([f"第{x + 1}篇音频文本: {y}" for x, y in enumerate(doc_list)])
+        )
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_sort = claude_response.json().get("completion", "")
+        print(claude_sort)
+        claude_sort = [max(int(x.strip()) - 1, 0) for x in re.findall(r"\s\d+|\d+\s", claude_sort) if int(x.strip()) <= len(doc_list)]
+        claude_sort = sorted(set(claude_sort), key=claude_sort.index)
+        claude_sort.extend(list(set([x for x in range(len(doc_list))]) - set(claude_sort)))
+        print(claude_sort)
+        return claude_sort

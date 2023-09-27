@@ -82,6 +82,4 @@ def my_pickpod_task(audio_doc: AudioDocument, task_config: TaskConfig):
         st.error("语音识别处理失败，错误码：{}，错误信息：{}。".format(e.args[0], e.args[-1]))
 
     finally:
-        with open(f"{task_config.ydl_path}/index.txt", "a") as f:
-            f.write(f"{audio_doc.uuid}\n")
         audio_doc.save_as_json(json_path=f"{task_config.ydl_path}/doc/{audio_doc.uuid}.json")

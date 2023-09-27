@@ -27,6 +27,7 @@ def env_set(input_hugging_face: str, input_claude: str, input_listen_note: str) 
         f.write(f"LISTEN_NOTE_KEY={input_listen_note}\n")
 
 
+st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Configuration",
     page_icon="../library/logo.png",
