@@ -65,7 +65,7 @@ if "audio_gallery" not in st.session_state:
         }
 
 
-def index(df_wiki: Dict[str, List[str | Dict]]) -> None:
+def index(df_wiki: Dict[str, List[str or Dict]]) -> None:
 
     for df_name in df_wiki["recommend"]:
 
@@ -111,7 +111,7 @@ def index(df_wiki: Dict[str, List[str | Dict]]) -> None:
         audio_doc.save_as_json(f"{LIBRARY_PATH}/doc/{df_name}.json")
 
 
-def wiki_gallery(df_wiki: Dict[str, List[str | Dict]]) -> None:
+def wiki_gallery(df_wiki: Dict[str, List[str or Dict]]) -> None:
 
     with st.expander("查看我的知识库"):
 

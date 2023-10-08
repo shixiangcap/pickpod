@@ -100,6 +100,9 @@ st.write("# 查看 Pickpod 文稿详情 🔎")
 
 df_name = st.experimental_get_query_params().get("uuid")
 
+with open(f"{LIBRARY_PATH}/wiki.json", "r", encoding="utf-8") as f:
+    df_wiki = json.load(f)
+
 if df_name:
 
     with open(f"{LIBRARY_PATH}/doc/{df_name[0]}.json", "r", encoding="utf-8") as fr:
@@ -107,9 +110,6 @@ if df_name:
         st.json(df_json)
 
 else:
-
-    with open(f"{LIBRARY_PATH}/wiki.json", "r", encoding="utf-8") as f:
-        df_wiki = json.load(f)
 
     if len(df_wiki.get("recommend", list())):
         st.markdown("以下是 **Pickpod** 为您最新精选的播客：")
@@ -121,5 +121,5 @@ st.divider()
 
 wiki_gallery(df_wiki)
 
-with open("./library/wiki.json", "w") as f:
+with open(f"{LIBRARY_PATH}/wiki.json", "w") as f:
     f.write(json.dumps(df_wiki, indent=4, separators=(",", ": "), ensure_ascii=False))
