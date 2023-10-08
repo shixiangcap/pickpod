@@ -43,13 +43,13 @@ Compared to the personal open-source prototype in this repository, the commercia
 
 ## Background
 
-<img src="https://github.com/shixiangcap/pickpod/assets/41248645/4ffe3447-02bf-4474-be81-a5912e240e4c" width=100%/>
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/13c8b7b3-f901-462b-9cb4-396009fa0148" width=100%/>
 
 The goals for **`Pickpod`** are:
 
 1. High-quality integration with [yt-dlp](https://github.com/yt-dlp/yt-dlp), [faster-whisper](https://github.com/guillaumekln/faster-whisper), and [pyannote-audio](https://github.com/pyannote/pyannote-audio), so that users can quickly obtain the text result of the corresponding audio transcription by simply inputting a link or a local file.
 
-2. The convenient use of [LISTEN NOTES Podcast API](https://www.listennotes.com/api/docs/) and [Claude API](https://docs.anthropic.com/claude/reference/getting-started-with-the-api). After completing the necessary settings and making a task, **`Pickpod`** can get the list of podcasts the users are interested in regularly according to the specified release period. Thus, the transcription task can be completed in batch. Then, **`Pickpod`** can pick up podcasts based on the evaluation through the extracted keywords, summaries, and views. Users can reference and modify the recommendation, and the sort of podcasts will update soon.
+2. The convenient use of [LISTEN NOTES Podcast API](https://www.listennotes.com/api/docs/) and [Claude API](https://docs.anthropic.com/claude/reference/getting-started-with-the-api). After completing the necessary settings and making a task, **`Pickpod`** can get the list of podcasts the users are interested in regularly according to the specified release period. Thus, the transcription task can be completed in batch. Then, **`Pickpod`** can pick up podcasts based on the evaluation through the extracted keywords, summaries, views, or only the `LLM`. Users can reference and modify the recommendation according to the sorting results of podcasts.
 
 3. Rapid deployment for local environments, so that when the user launches the project, all features are easily accessible in the browser.
 
@@ -225,6 +225,16 @@ pickpod_task.audio_doc.save_as_json()
 <img src="https://github.com/shixiangcap/pickpod/assets/41248645/2dd3f72f-d35c-489f-9733-1262c3b5dbba" width=100%/>
 
 <img src="https://github.com/shixiangcap/pickpod/assets/41248645/22cbb191-57a6-43ad-bb8b-1547411c5582" width=100%/>
+
+### The operation of building and editing your private wiki
+
+You can search podcasts in your `Gallery`.
+
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/d4c43b4e-1a48-45a0-a3fb-7282e825c3ed" width=100%/>
+
+If you need **`Pickpod`** to pick up podcasts based on your private wiki, the prompt will use both valuable and worthless views.
+
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/7b3c3ed0-1869-4d1c-9a48-7e6d1b016843" width=100%/>
 
 ### A complete transcription result of a audio file
 
