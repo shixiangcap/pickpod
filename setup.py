@@ -14,16 +14,18 @@ URL = "https://github.com/shixiangcap/pickpod"
 EMAIL = "it@shixiangcap.com"
 AUTHOR = "shixiangcap"
 REQUIRES_PYTHON = ">=3.8.0"
-VERSION = "0.1.2"
+VERSION = "1.0.0"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "faster_whisper==0.7.1",
-    "OpenCC==1.1.6",
-    "pyannote.audio==2.1.1",
-    "pydub==0.25.1",
-    "torchvision==0.14.1",
-    "yt_dlp==2023.7.6"
+    "faster_whisper>=0.9.0",
+    "OpenCC>=1.1.6",
+    "pyannote.audio>=3.0.0",
+    "pydub>=0.25.1",
+    "torch>=2.0.0",
+    "torchaudio>=2.0.0",
+    "torchvision>=0.15.0",
+    "yt_dlp>=2023.10.7"
 ]
 
 # What packages are optional?

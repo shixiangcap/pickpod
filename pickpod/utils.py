@@ -8,18 +8,20 @@ from typing import Any, Dict, List
 
 import opencc
 import torch
+import torchaudio
 import yt_dlp
 from faster_whisper import WhisperModel
 from pyannote.audio import Pipeline
+from pyannote.audio.pipelines.utils.hook import ProgressHook
 from pydub import AudioSegment
 
-from pickpod.doc import AudioDocument, SentenceDocument
+from pickpod.draft import AudioDraft, SentenceDraft
 
 
 class PickpodUtils(object):
 
     @staticmethod
-    def get_overlap(interval_1: SentenceDocument, interval_2: Any):
+    def get_overlap(interval_1: SentenceDraft, interval_2: Any) -> float:
         """
         Calculation the interval overlap
         """
@@ -32,7 +34,7 @@ class PickpodUtils(object):
         return intersection / union
 
     @staticmethod
-    def get_speaker_by_time(sentence_stamp: List[SentenceDocument], pyannote_stamp: List[Any]):
+    def get_speaker_by_time(sentence_stamp: List[SentenceDraft], pyannote_stamp: List[Any]) -> None:
         """
         Align the timestamps
         """
@@ -43,67 +45,79 @@ class PickpodUtils(object):
                 if overlap > max_overlap:
                     max_overlap = overlap
                     sentence.speaker = int(pyannote[2][8:])
-        return sentence_stamp
 
     @staticmethod
-    def pickpod_ytdlp(audio_doc: AudioDocument, ydl_options: Dict[str, Any]) -> None:
+    def pickpod_ytdlp(audio_draft: AudioDraft, ydl_options: Dict[str, Any]) -> None:
         """
         Download audio with yt_dlp
         """
         with yt_dlp.YoutubeDL(ydl_options) as ydl:
-            ydl_info = ydl.extract_info(audio_doc.url, download=True)
+            ydl_info = ydl.extract_info(audio_draft.url, download=True)
             # print(ydl_info)
-        if not audio_doc.title:
-            audio_doc.title = ydl_info.get("title", "")
-        if not audio_doc.description:
-            audio_doc.description = ydl_info.get("description", "")
+        if not audio_draft.title:
+            audio_draft.title = ydl_info.get("title", "")
+        if not audio_draft.description:
+            audio_draft.description = ydl_info.get("description", "")
         ydl_json = ydl.sanitize_info(ydl_info).get("requested_downloads", [[]])[0]
         if ydl_json.get("ext", ""):
-            audio_doc.ext = ydl_json.get("ext", "")
+            audio_draft.ext = ydl_json.get("ext", "")
         else:
-            audio_doc.ext = os.path.splitext(ydl_json.get("filepath", ""))[1][1:]
-        audio_doc.path = ydl_json.get("filepath", "")
-        if not audio_doc.length:
-            audio_doc.length = len(AudioSegment.from_file(audio_doc.path)) / 1000
+            audio_draft.ext = os.path.splitext(ydl_json.get("filepath", ""))[1][1:]
+        audio_draft.path = ydl_json.get("filepath", "")
+        if not audio_draft.duration:
+            audio_draft.duration = len(AudioSegment.from_file(audio_draft.path)) / 1000
 
     @staticmethod
-    def pickpod_whisper(audio_doc: AudioDocument, task_language: str = None, task_prompt: str = None, task_queue: Queue = None, model_file: str = "large-v2") -> (str, float):
+    def pickpod_whisper(audio_draft: AudioDraft, task_language: str = None, task_prompt: str = None, sentence_draft: Queue or List = None, model_file: str = "large-v2") -> float:
         """
         Get audio document with faster_whisper
         """
-        whisper_model = WhisperModel(model_file, device="cuda", compute_type="float16")
+        if torch.cuda.is_available():
+            whisper_model = WhisperModel(model_file, device="cuda", compute_type="float16")
+        else:
+            whisper_model = WhisperModel(model_file, device="cpu", compute_type="int8")
         whisper_segments, whisper_info = whisper_model.transcribe(
-            audio_doc.path,
+            audio_draft.path,
             language=task_language,
-            initial_prompt=task_prompt,
-            word_timestamps=False
+            initial_prompt=task_prompt
         )
+        audio_draft.language = whisper_info.language
         print(f"Detected language \"{whisper_info.language}\" with probability {whisper_info.language_probability * 100.0}%")
         for seg in whisper_segments:
-            sentence_document = SentenceDocument(
+            sd = SentenceDraft(
+                sentence_aid=audio_draft.uuid,
                 sentence_content=opencc.OpenCC("t2s").convert(seg.text.strip()),
                 sentence_start=seg.start,
                 sentence_end=seg.end
                 )
-            audio_doc.sentence.append(sentence_document)
-            if task_queue:
-                task_queue.put(sentence_document)
-        return task_language if task_language else whisper_info.language, whisper_info.language_probability * 100.0
+            if isinstance(sentence_draft, List):
+                sentence_draft.append(sd)
+            elif isinstance(sentence_draft, Queue):
+                sentence_draft.put(sd)
+        return whisper_info.language_probability * 100.0
 
     @staticmethod
-    def pickpod_pyannote(audio_doc: AudioDocument, key_hugging_face: str, ydl_path: str) -> None:
+    def pickpod_pyannote(audio_draft: AudioDraft, key_hugging_face: str, path_wav: str) -> List[Any]:
         """
         Execute speaker diarization with pyannote.audio
         """
-        pyannote_pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization@2.1", use_auth_token=key_hugging_face)
-        if audio_doc.ext.lower() != "wav":
-            wav_path = f"{ydl_path}/{audio_doc.uuid}.wav"
-            pyannote_wav = AudioSegment.from_file(audio_doc.path)
-            pyannote_wav.export(wav_path, format="wav")
-            pyannote_stamp = pyannote_pipeline({"uri": "blabal", "audio": wav_path})
-        else:
-            pyannote_stamp = pyannote_pipeline({"uri": "blabal", "audio": audio_doc.path})
-        audio_doc.sentence = PickpodUtils.get_speaker_by_time(audio_doc.sentence, list(pyannote_stamp.itertracks(yield_label=True)))
+        pyannote_pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization-3.0", use_auth_token=key_hugging_face)
+        if torch.cuda.is_available():
+            try:
+                pyannote_pipeline.to(torch.device("cuda"))
+            except Exception as e:
+                pyannote_pipeline.to(torch.device("cpu"))
+                print("CUDA pyannote failed, CODE: {}, INFO: {}.".format(e.args[0], e.args[-1]))
+        with ProgressHook() as hook:
+            if audio_draft.ext.lower() != "wav":
+                path_wav = f"{path_wav}/{audio_draft.uuid}.wav"
+                pyannote_wav = AudioSegment.from_file(audio_draft.path)
+                pyannote_wav.export(path_wav, format="wav")
+                waveform, sample_rate = torchaudio.load(path_wav)
+            else:
+                waveform, sample_rate = torchaudio.load(audio_draft.path)
+            pyannote_stamp = pyannote_pipeline({"waveform": waveform, "sample_rate": sample_rate}, hook=hook)
+        return list(pyannote_stamp.itertracks(yield_label=True))
 
     @staticmethod
     def static_clean() -> None:
