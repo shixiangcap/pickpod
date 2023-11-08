@@ -66,9 +66,7 @@ If you need to filter the list of podcasts to be batch transcribed based on cust
 
 ### ❗️Warning
 
-According to our experiments, the latest branch of [pyannote-audio](https://github.com/pyannote/pyannote-audio) using `torch>=2.0.0` may [not detect GPU and run only on CPU](https://github.com/pyannote/pyannote-audio/issues/1354), so **`Pickpod`** requires `pyannote.audio==2.1.1` using `torch==1.13.1`.
-
-Due to **`Pickpod`** strictly restricting the version of used `Python` packages, [pyannote-audio](https://github.com/pyannote/pyannote-audio) or other packages may automatically solve conflicts and remove some packages that you have installed before, such as `torch>=2.0.0`. To avoid unnecessary conflicts or damage to your environment, we strongly recommend installing **`Pickpod`** in a brand new `Python` environment or a `Python` virtual environment.
+Due to **`Pickpod`** strictly restricting the version of used `Python` packages, some packages may automatically solve conflicts and remove some of the packages that you have installed before. To avoid unnecessary conflicts or damage to your environment, we strongly recommend installing **`Pickpod`** in a brand new `Python` environment or a `Python` virtual environment.
 
 ### Python
 
@@ -88,7 +86,10 @@ If you want to run the `Streamlit` app that provides a web UI, install from sour
 
 ```sh
 $ pip install -r ./pickpod/app/requirements.txt
+$ # For Linux or Unix
 $ streamlit run ./pickpod/app/Home.py --server.port 8051
+$ # For Windows
+$ python -m streamlit run ./pickpod/app/Home.py --server.port 8051
 ```
 
 Then visit `http://127.0.0.1:8051` in your local browser.
@@ -165,7 +166,7 @@ $ pip install ./pickpod
 
 ```python
 from pickpod.config import TaskConfig
-from pickpod.doc import AudioDocument
+from pickpod.draft import AudioDraft
 from pickpod.task import PickpodTask
 
 HUGGING_FACE_KEY = "YOUR_HUGGING_FACE_KEY"
@@ -174,22 +175,22 @@ HUGGING_FACE_KEY = "YOUR_HUGGING_FACE_KEY"
 audio_url = "YOUR_AUDIO_URL_ON_INTERNET"
 
 # Set audio information
-audio_doc = AudioDocument(audio_url=audio_url)
+audio_draft = AudioDraft(audio_url=audio_url)
 # Config pickpod task
 task_config = TaskConfig(key_hugging_face=HUGGING_FACE_KEY, pipeline=True)
 # Initial pickpod task
-pickpod_task = PickpodTask(audio_doc, task_config)
+pickpod_task = PickpodTask(audio_draft, task_config)
 # Start pickpod task
 pickpod_task.pickpod_with_url()
 # Get the result of pickpod task
-print(pickpod_task.audio_doc.__dict__)
+print(pickpod_task.__dict__)
 ```
 
 ### Do local **`Pickpod`** task
 
 ```python
 from pickpod.config import TaskConfig
-from pickpod.doc import AudioDocument
+from pickpod.draft import AudioDraft
 from pickpod.task import PickpodTask
 
 HUGGING_FACE_KEY = "YOUR_HUGGING_FACE_KEY"
@@ -198,15 +199,15 @@ HUGGING_FACE_KEY = "YOUR_HUGGING_FACE_KEY"
 audio_path = "YOUR_LOCAL_FILE_PATH"
 
 # Set audio information
-audio_doc = AudioDocument(audio_path=audio_path)
+audio_draft = AudioDraft(audio_path=audio_path)
 # Config pickpod task
 task_config = TaskConfig(key_hugging_face=HUGGING_FACE_KEY, pipeline=False)
 # Initial pickpod task
-pickpod_task = PickpodTask(audio_doc, task_config)
+pickpod_task = PickpodTask(audio_draft, task_config)
 # Start pickpod task
 pickpod_task.pickpod_with_local()
 # Save the result of pickpod task
-pickpod_task.audio_doc.save_as_json()
+pickpod_task.save_to_json()
 ```
 
 
