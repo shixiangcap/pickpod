@@ -33,6 +33,7 @@ class TaskConfig(object):
             path_db: str = "", # Database save path
             task_language: str = "", # Audio language for WhisperModel
             task_prompt: str = "", # Audio prompt for WhisperModel
+            task_proxy: str = "",
             pipeline: bool = False, # Get speaker diarization or not
             keyword: bool = False, # Get keyword or not
             summary: bool = False, # Get summary or not
@@ -45,13 +46,16 @@ class TaskConfig(object):
         self.path_db = path_db if path_db else os.getcwd()
         self.language = task_language if task_language else None
         self.prompt = task_prompt if task_prompt else None
+        self.proxy = task_proxy if task_proxy else None
         self.pipeline = pipeline
         self.keyword = keyword
         self.summary = summary
         self.view = view
 
-    def create_db(self, db: str = "pickpod.db") -> None:
-        self.conn = sqlite3.connect(os.path.join(self.path_db, db))
+class DBClient(object):
+
+    def __init__(self, path_db: str = "", name_db: str = "pickpod.db") -> None:
+        self.conn = sqlite3.connect(os.path.join(path_db, name_db))
 
     def create_tb(self) -> None:
         cur = self.conn.cursor()
@@ -132,6 +136,10 @@ class TaskConfig(object):
         """)
         cur.close()
         self.conn.commit()
+
+    @staticmethod
+    def find_tb(name_tb: str) -> (str, tuple):
+        return "SELECT count(1) FROM sqlite_master WHERE type=? AND name=?", ("table", name_tb)
 
     def execute(self, sql: str = "", arg: tuple = tuple()) -> None:
         cur = self.conn.cursor()

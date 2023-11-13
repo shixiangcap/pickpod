@@ -47,11 +47,11 @@ class PickpodUtils(object):
                     sentence.speaker = int(pyannote[2][8:])
 
     @staticmethod
-    def pickpod_ytdlp(audio_draft: AudioDraft, ydl_options: Dict[str, Any]) -> None:
+    def pickpod_ytdlp(audio_draft: AudioDraft, ydl_option: Dict[str, Any]) -> None:
         """
         Download audio with yt_dlp
         """
-        with yt_dlp.YoutubeDL(ydl_options) as ydl:
+        with yt_dlp.YoutubeDL(ydl_option) as ydl:
             ydl_info = ydl.extract_info(audio_draft.url, download=True)
             # print(ydl_info)
         if not audio_draft.title:

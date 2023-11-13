@@ -207,7 +207,7 @@ pickpod_task = PickpodTask(audio_draft, task_config)
 # Start pickpod task
 pickpod_task.pickpod_with_local()
 # Save the result of pickpod task
-pickpod_task.save_to_json()
+pickpod_task.save_to_txt()
 ```
 
 

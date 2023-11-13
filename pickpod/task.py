@@ -25,13 +25,15 @@ class PickpodTask(object):
         self.sentence_text = ""
         self.summary_list = list()
         self.view_list = list()
-        self.claude_client = ClaudeClient(key_claude=self.task_config.claude)
+        self.claude_client = ClaudeClient(key_claude=self.task_config.claude, http_proxy=self.task_config.proxy)
 
     def pickpod_with_url(self) -> None:
         try:
             start_time = time.time()
             if not self.task_config.ydl_option.get("outtmpl"):
                 self.task_config.ydl_option["outtmpl"] = f"{self.task_config.path_wav}/{self.audio_draft.uuid}.%(ext)s"
+            if not self.task_config.ydl_option.get("proxy") and self.task_config.proxy:
+                self.task_config.ydl_option["proxy"] = self.task_config.proxy
             PickpodUtils.pickpod_ytdlp(self.audio_draft, self.task_config.ydl_option)
             print(f"The downloading is done, using time: {time.time() - start_time} s")
 
@@ -161,13 +163,13 @@ class PickpodTask(object):
     def save_to_json(self, json_path: str = "", use_title: bool = False) -> None:
         if not json_path:
             json_path = f"{self.audio_safe_name()}.json" if use_title else f"{self.audio_draft.uuid}.json"
-        with open(json_path, "w") as f:
+        with open(json_path, "w", encoding="utf-8") as f:
             f.write(json.dumps(self.__dict__, indent=4, separators=(",", ": "), ensure_ascii=False))
 
     def save_to_txt(self, txt_path: str = "", use_title: bool = True) -> None:
         if not txt_path:
             txt_path = f"{self.audio_safe_name()}.txt" if use_title else f"{self.audio_draft.uuid}.txt"
-        with open(txt_path, "w") as f:
+        with open(txt_path, "w", encoding="utf-8") as f:
             f.write("\n".join([f"Speaker {x.speaker} (from {s2t(x.start)} to {s2t(x.end)}): {x.content}" for x in self.sentence_merge()]))
 
     def save_to_db(self) -> None:

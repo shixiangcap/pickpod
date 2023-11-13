@@ -29,7 +29,7 @@ def s2t(t: float = 0.0) -> str:
 
 class ClaudeClient(object):
 
-    def __init__(self, key_claude: str = "") -> None:
+    def __init__(self, key_claude: str = "", http_proxy: str = None) -> None:
         self.url = "https://api.anthropic.com/v1/complete"
         self.header = {
             "accept": "application/json",
@@ -38,10 +38,11 @@ class ClaudeClient(object):
             "x-api-key": key_claude
         }
         self.body = {"model": "claude-2", "max_tokens_to_sample": 10000}
+        self.proxy = {"http": http_proxy, "https": http_proxy} if http_proxy else None
 
     def get_keyword_zh(self, doc: str = "") -> List[str]:
         self.body["prompt"] = PROMPT_KEYWORD_ZH.format(doc)
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_keyword = claude_response.json().get("completion", "")
         print(claude_keyword)
         return [y.strip() for x in [
@@ -51,7 +52,7 @@ class ClaudeClient(object):
 
     def get_keyword_en(self, doc: str = "") -> List[str]:
         self.body["prompt"] = PROMPT_KEYWORD_EN.format(doc)
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_keyword = claude_response.json().get("completion", "")
         print(claude_keyword)
         return [y.strip() for x in [
@@ -61,7 +62,7 @@ class ClaudeClient(object):
 
     def get_summary_zh(self, duration: float = 0.0, doc: str = "") -> List[tuple]:
         self.body["prompt"] = PROMPT_SUMMARY_ZH.format(s2t(duration), doc)
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_summary = claude_response.json().get("completion", "")
         print(claude_summary)
         return [
@@ -72,7 +73,7 @@ class ClaudeClient(object):
 
     def get_summary_en(self, duration: float = 0.0, doc: str = "") -> List[tuple]:
         self.body["prompt"] = PROMPT_SUMMARY_EN.format(s2t(duration), doc)
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_summary = claude_response.json().get("completion", "")
         print(claude_summary)
         return [
@@ -83,7 +84,7 @@ class ClaudeClient(object):
 
     def get_view_zh(self, doc: str = "") -> List[str]:
         self.body["prompt"] = PROMPT_VIEW_ZH.format(doc)
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_view = claude_response.json().get("completion", "")
         print(claude_view)
         return [
@@ -94,7 +95,7 @@ class ClaudeClient(object):
 
     def get_view_en(self, doc: str = "") -> List[str]:
         self.body["prompt"] = PROMPT_VIEW_EN.format(doc)
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_view = claude_response.json().get("completion", "")
         print(claude_view)
         return [
@@ -108,7 +109,7 @@ class ClaudeClient(object):
             len(doc_list),
             "\n\n".join([f"第{x + 1}篇音频文本: {y}" for x, y in enumerate(doc_list)])
         )
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_sort = claude_response.json().get("completion", "")
         print(claude_sort)
         claude_sort = [max(int(x.strip()) - 1, 0) for x in re.findall(r"\s\d+|\d+\s", claude_sort) if int(x.strip()) <= len(doc_list)]
@@ -124,7 +125,7 @@ class ClaudeClient(object):
             "\n\n".join([f"观点{x + 1}: {y}" for x, y in enumerate(view_dict[False])]),
             "\n\n".join([f"第{x + 1}篇音频文本: {y}" for x, y in enumerate(doc_list)])
         )
-        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body)
+        claude_response = requests.request("POST", url=self.url, headers=self.header, json=self.body, proxies=self.proxy)
         claude_sort = claude_response.json().get("completion", "")
         print(claude_sort)
         claude_sort = [max(int(x.strip()) - 1, 0) for x in re.findall(r"\s\d+|\d+\s", claude_sort) if int(x.strip()) <= len(doc_list)]
