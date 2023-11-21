@@ -40,6 +40,10 @@ class SentenceDraft(object):
         return "SELECT uuid, audioId, content, start, end, speaker, status, createTime, updateTime FROM sentence WHERE audioId=? AND status=? ORDER BY start ASC", (sentence_aid, 1)
 
     @staticmethod
+    def select_by_content(sentence_content: str) -> (str, tuple):
+        return "SELECT DISTINCT audioId FROM sentence WHERE content LIKE ? AND status=?", (f"%{sentence_content}%", 1)
+
+    @staticmethod
     def delete_status(sentence_uuid: str) -> (str, tuple):
         return "UPDATE sentence SET status=?, updateTime=? WHERE uuid=?", (0, int(time.time()), sentence_uuid)
 
@@ -164,6 +168,14 @@ class WikiDraft(object):
         return "UPDATE formation SET status=?, updateTime=? WHERE uuid=?", (0, int(time.time()), wiki_uuid)
 
     @staticmethod
+    def select_by_value(wiki_value: int) -> (str, tuple):
+        return "SELECT uuid, audioId, content, mark, status, createTime, updateTime FROM formation WHERE mark=? AND target=? AND status=? ORDER BY createTime ASC", (wiki_value, 2, 1)
+
+    @staticmethod
+    def select_all() -> str:
+        return "SELECT uuid, audioId, content, mark, status, createTime, updateTime FROM formation WHERE target=2 AND status=1 ORDER BY createTime ASC"
+
+    @staticmethod
     def db_init(wiki_draft: tuple) -> object:
         return WikiDraft(wiki_draft[0], wiki_draft[1], wiki_draft[2], wiki_draft[3], wiki_draft[4], wiki_draft[5], wiki_draft[6])
 
@@ -215,6 +227,38 @@ class AudioDraft(object):
     @staticmethod
     def delete_status(audio_uuid: str) -> (str, tuple):
         return "UPDATE audio SET status=?, updateTime=? WHERE uuid=?", (0, int(time.time()), audio_uuid)
+
+    @staticmethod
+    def count_num() -> str:
+        return "SELECT count(1) FROM audio WHERE status=1"
+
+    @staticmethod
+    def sort_by_ctime(reverse: int = 0) -> str:
+        return f'''SELECT createTime FROM audio WHERE status=1 ORDER BY createTime {"DESC" if reverse else "ASC"}'''
+
+    @staticmethod
+    def select_by_ctime(time_min: int, time_max: int) -> (str, tuple):
+        return "SELECT uuid FROM audio WHERE createTime>=? AND createTime<? AND status=1 ORDER BY createTime DESC", (time_min, time_max)
+
+    @staticmethod
+    def select_all_uuid() -> str:
+        return "SELECT uuid, origin, createTime FROM audio WHERE status=1 ORDER BY createTime DESC"
+
+    @staticmethod
+    def select_title_uuid(audio_title: str, time_min: int, time_max: int) -> (str, tuple):
+        return "SELECT uuid, origin, createTime FROM audio WHERE title LIKE ? AND createTime>=? AND createTime<? AND status=1", (f"%{audio_title}%", time_min, time_max)
+
+    @staticmethod
+    def select_description_uuid(audio_description: str, time_min: int, time_max: int) -> (str, tuple):
+        return "SELECT uuid, origin, createTime FROM audio WHERE description LIKE ? AND createTime>=? AND createTime<? AND status=1", (f"%{audio_description}%", time_min, time_max)
+
+    @staticmethod
+    def select_keyword_uuid(audio_keyword: str, time_min: int, time_max: int) -> (str, tuple):
+        return "SELECT uuid, origin, createTime FROM audio WHERE keyword LIKE ? AND createTime>=? AND createTime<? AND status=1", (f"%{audio_keyword}%", time_min, time_max)
+
+    @staticmethod
+    def select_sentence_uuid(audio_uuid: str, time_min: int, time_max: int) -> (str, tuple):
+        return "SELECT uuid, origin, createTime FROM audio WHERE uuid=? AND createTime>=? AND createTime<? AND status=1 LIMIT 1", (audio_uuid, time_min, time_max)
 
     @staticmethod
     def db_init(audio_draft: tuple) -> object:

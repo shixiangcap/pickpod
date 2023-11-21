@@ -10,7 +10,7 @@ from typing import Any, Dict, List
 from pydub import AudioSegment
 
 from pickpod.api import ClaudeClient, s2t
-from pickpod.config import TaskConfig
+from pickpod.config import DBClient, TaskConfig
 from pickpod.draft import AudioDraft, SentenceDraft, SummaryDraft, ViewDraft
 from pickpod.utils import PickpodUtils
 
@@ -23,8 +23,8 @@ class PickpodTask(object):
         self.sentence_draft = list()
         self.sentence_pipeline = list()
         self.sentence_text = ""
-        self.summary_list = list()
-        self.view_list = list()
+        self.summary_draft = list()
+        self.view_draft = list()
         self.claude_client = ClaudeClient(key_claude=self.task_config.claude, http_proxy=self.task_config.proxy)
 
     def pickpod_with_url(self) -> None:
@@ -84,7 +84,7 @@ class PickpodTask(object):
         if self.task_config.summary:
             print("Getting audio summary.")
             if self.task_config.language == "zh":
-                self.summary_list = [
+                self.summary_draft = [
                     SummaryDraft(
                         summary_aid=self.audio_draft.uuid,
                         summary_content=x[1],
@@ -93,7 +93,7 @@ class PickpodTask(object):
                     for x in self.claude_client.get_summary_zh(self.audio_draft.duration, self.sentence_text)
                     ]
             else:
-                self.summary_list = [
+                self.summary_draft = [
                     SummaryDraft(
                         summary_aid=self.audio_draft.uuid,
                         summary_content=x[1],
@@ -107,7 +107,7 @@ class PickpodTask(object):
         if self.task_config.view:
             print("Getting audio views.")
             if self.task_config.language == "zh":
-                self.view_list = [
+                self.view_draft = [
                     ViewDraft(
                         view_aid=self.audio_draft.uuid,
                         view_content=x
@@ -115,7 +115,7 @@ class PickpodTask(object):
                     for x in self.claude_client.get_view_zh(self.sentence_text)
                     ]
             else:
-                self.view_list = [
+                self.view_draft = [
                     ViewDraft(
                         view_aid=self.audio_draft.uuid,
                         view_content=x
@@ -156,8 +156,8 @@ class PickpodTask(object):
         return {
             "audio": self.audio_draft.__dict__,
             "sentence": [x.__dict__ for x in self.sentence_draft],
-            "summary": [x.__dict__ for x in self.summary_list],
-            "view": [x.__dict__ for x in self.view_list]
+            "summary": [x.__dict__ for x in self.summary_draft],
+            "view": [x.__dict__ for x in self.view_draft]
         }
 
     def save_to_json(self, json_path: str = "", use_title: bool = False) -> None:
@@ -173,4 +173,14 @@ class PickpodTask(object):
             f.write("\n".join([f"Speaker {x.speaker} (from {s2t(x.start)} to {s2t(x.end)}): {x.content}" for x in self.sentence_merge()]))
 
     def save_to_db(self) -> None:
-        pass
+        db_client = DBClient(self.task_config.path_db)
+        db_sql = [self.audio_draft.insert()]
+        for sd in self.sentence_draft:
+            db_sql.append(sd.insert())
+        for sd in self.summary_draft:
+            db_sql.append(sd.insert())
+        for vd in self.view_draft:
+            db_sql.append(vd.insert())
+        for x, y in db_sql:
+            db_client.execute(x, y)
+        db_client.close()

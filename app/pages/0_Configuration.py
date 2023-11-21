@@ -30,7 +30,7 @@ def env_set(input_hugging_face: str, input_claude: str, input_listen_note: str) 
 st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Configuration",
-    page_icon="../library/logo.png",
+    page_icon="../data/logo.png",
     menu_items={
         "Get Help": "https://github.com/shixiangcap/pickpod",
         "Report a bug": "https://github.com/shixiangcap/pickpod",
@@ -67,7 +67,7 @@ if not click_save:
     st.code(">>> ffmpeg -version", language="bash")
 
     st.write("#### Hugging Face 可用性")
-    st.code(">>> from pyannote.audio import Pipeline\n>>> Pipeline.from_pretrained(\"pyannote/speaker-diarization@2.1\", use_auth_token=HUGGING_FACE_KEY)", language="python")
+    st.code(">>> from pyannote.audio import Pipeline\n>>> Pipeline.from_pretrained(\"pyannote/speaker-diarization-3.0\", use_auth_token=HUGGING_FACE_KEY)", language="python")
 
     st.write("#### Claude 可用性")
     st.code("curl --request POST --url https://api.anthropic.com/v1/complete \\\n     --header \"accept: application/json\" \\\n     --header \"anthropic-version: 2023-06-01\" \\\n     --header \"content-type: application/json\" \\\n     --header \"x-api-key: $ANTHROPIC_API_KEY\" \\\n     --data '{\"model\": \"claude-2\", \"max_tokens_to_sample\": 256, \"prompt\": \"Human: Hello, world!\\n\\nAssistant:\"}'", language="bash")
@@ -101,12 +101,12 @@ elif click_save and not click_reset:
     st.code(code_ffmpeg, language="bash")
 
     st.write("#### Hugging Face 可用性")
-    pyannote_pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization@2.1", use_auth_token=HUGGING_FACE_KEY)
+    pyannote_pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization-3.0", use_auth_token=HUGGING_FACE_KEY)
     if pyannote_pipeline is None:
         test_hugging_face = f"Could not download \"pyannote/speaker-diarization\" pipeline.\n    It might be because the pipeline is private or gated so make\n    sure to authenticate. Visit https://hf.co/settings/tokens to\n    create your access token and retry with:\n\n    >>> Pipeline.from_pretrained(\"pyannote/speaker-diarization\", use_auth_token=YOUR_AUTH_TOKEN)\n\n    If this still does not work, it might be because the pipeline is gated:\n    visit https://hf.co/pyannote/speaker-diarization to accept the user conditions."
     else:
         test_hugging_face = type(pyannote_pipeline)
-    code_hugging_face = f">>> from pyannote.audio import Pipeline\n>>> Pipeline.from_pretrained(\"pyannote/speaker-diarization@2.1\", use_auth_token=HUGGING_FACE_KEY)\n    {test_hugging_face}"
+    code_hugging_face = f">>> from pyannote.audio import Pipeline\n>>> Pipeline.from_pretrained(\"pyannote/speaker-diarization-3.0\", use_auth_token=HUGGING_FACE_KEY)\n    {test_hugging_face}"
     st.code(code_hugging_face, language="python")
 
     st.write("#### Claude 可用性")

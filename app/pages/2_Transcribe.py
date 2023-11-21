@@ -2,16 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import os
+import threading
 import time
+from queue import Queue
 
-import my_task
 import streamlit as st
 from dotenv import find_dotenv, load_dotenv
-from Home import LIBRARY_PATH
+from Home import DATA_PATH
 from pydub import AudioSegment
 
-from pickpod.config import YDL_OPTIONS, TaskConfig
-from pickpod.doc import AudioDocument
+from pickpod.api import ClaudeClient
+from pickpod.config import YDL_OPTION, DBClient, TaskConfig
+from pickpod.draft import AudioDraft, SentenceDraft, SummaryDraft, ViewDraft
 from pickpod.utils import PickpodUtils
 
 
@@ -21,12 +23,13 @@ os.chdir(os.path.split(os.path.realpath(__file__))[0])
 load_dotenv(find_dotenv(), override=True)
 HUGGING_FACE_KEY = os.getenv("HUGGING_FACE_KEY")
 CLAUDE_KEY = os.getenv("CLAUDE_KEY")
+HTTP_PROXY = os.getenv("HTTP_PROXY")
 
 
 st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Transcribe",
-    page_icon="../library/logo.png",
+    page_icon="../data/logo.png",
     menu_items={
         "Get Help": "https://github.com/shixiangcap/pickpod",
         "Report a bug": "https://github.com/shixiangcap/pickpod",
@@ -38,6 +41,118 @@ if "flag_start" not in st.session_state:
     st.session_state.flag_start = False
     st.session_state.pp_url_list = list()
     st.session_state.pp_upload_list = list()
+
+
+def my_pickpod_whisper(audio_draft: AudioDraft, task_language: str = None, task_prompt: str = None, sentence_queue: Queue = None) -> None:
+    task_probability = PickpodUtils.pickpod_whisper(audio_draft, task_language, task_prompt, sentence_queue)
+    sentence_queue.put(None)
+    sentence_queue.put(task_probability)
+
+
+def my_pickpod_task(audio_draft: AudioDraft, task_config: TaskConfig):
+
+    db_sql = list()
+
+    try:
+        st.caption("2⃣️ 获取音频文件文稿", unsafe_allow_html=False)
+        start_time = time.time()
+        sentence_queue = Queue()
+        sentence_draft = list()
+        sentence_bar = st.progress(0, text="转录中，请稍后......")
+        task_thread = threading.Thread(target=my_pickpod_whisper, args=(audio_draft, task_config.language, task_config.prompt, sentence_queue, ))
+        task_thread.start()
+        while True:
+            sd: SentenceDraft = sentence_queue.get()
+            if not sd:
+                break
+            sentence_draft.append(sd)
+            sentence_bar.progress(sd.end / audio_draft.duration, text=f"转录内容：（{sd.start}s -> {sd.end}s）{sd.content}")
+        task_thread.join()
+        task_config.language = task_config.language if task_config.language else audio_draft.language
+        st.text(f"已检测到音频文件的语言为：{audio_draft.language}\n评估检测准确率为：{sentence_queue.get()}%")
+        st.info(f"ℹ️ 音频文件文稿已完成，用时：{time.time() - start_time}秒")
+
+        st.caption("3⃣️ 执行音频文件声纹分割聚类", unsafe_allow_html=False)
+        if task_config.pipeline:
+            start_time = time.time()
+            sentence_pipeline = PickpodUtils.pickpod_pyannote(audio_draft, task_config.hugging_face, task_config.path_wav)
+            st.info(f"ℹ️ 音频文件声纹分割聚类完成，用时：{time.time() - start_time}秒")
+            PickpodUtils.get_speaker_by_time(sentence_draft, sentence_pipeline)
+        else:
+            st.info(f"ℹ️ 音频文件声纹分割聚类已跳过")
+
+        claude_client = ClaudeClient(key_claude=task_config.claude, http_proxy=task_config.proxy)
+        sentence_text = " ".join([x.content for x in sentence_draft])
+        for sd in sentence_draft:
+            db_sql.append(sd.insert())
+
+        st.caption("4⃣️ 提取音频文件关键词", unsafe_allow_html=False)
+        if task_config.keyword:
+            if task_config.language == "zh":
+                audio_draft.keyword = "\n".join(claude_client.get_keyword_zh(sentence_text))
+            else:
+                audio_draft.keyword = "\n".join(claude_client.get_keyword_en(sentence_text))
+        else:
+            st.info(f"ℹ️ 提取音频文件关键词已跳过")
+        db_sql.append(audio_draft.insert())
+
+        st.caption("5⃣️ 提取音频文件文稿摘要", unsafe_allow_html=False)
+        if task_config.summary:
+            if task_config.language == "zh":
+                summary_draft = [
+                    SummaryDraft(
+                        summary_aid=audio_draft.uuid,
+                        summary_content=x[1],
+                        summary_start=x[0]
+                        )
+                    for x in claude_client.get_summary_zh(audio_draft.duration, sentence_text)
+                    ]
+            else:
+                summary_draft = [
+                    SummaryDraft(
+                        summary_aid=audio_draft.uuid,
+                        summary_content=x[1],
+                        summary_start=x[0]
+                        )
+                    for x in claude_client.get_summary_en(audio_draft.duration, sentence_text)
+                    ]
+            for sd in summary_draft:
+                db_sql.append(sd.insert())
+        else:
+            st.info(f"ℹ️ 提取音频文件文稿摘要已跳过")
+
+        st.caption("6⃣️ 提取音频文件表述观点", unsafe_allow_html=False)
+        if task_config.view:
+            if task_config.language == "zh":
+                view_draft = [
+                    ViewDraft(
+                        view_aid=audio_draft.uuid,
+                        view_content=x
+                        )
+                    for x in claude_client.get_view_zh(sentence_text)
+                    ]
+            else:
+                view_draft = [
+                    ViewDraft(
+                        view_aid=audio_draft.uuid,
+                        view_content=x
+                        )
+                    for x in claude_client.get_view_en(sentence_text)
+                    ]
+            for vd in view_draft:
+                db_sql.append(vd.insert())
+        else:
+            st.info(f"ℹ️ 提取音频文件表述观点已跳过")
+
+    except Exception as e:
+        st.error("语音识别处理失败，错误码：{}，错误信息：{}。".format(e.args[0], e.args[-1]))
+
+    finally:
+        db_client = DBClient(task_config.path_db)
+        for x, y in db_sql:
+            db_client.execute(x, y)
+        db_client.close()
+
 
 def run():
 
@@ -85,7 +200,7 @@ def run():
 
         st.session_state.flag_start = True
 
-        st.experimental_rerun()
+        st.rerun()
 
     elif not click_start and click_restart:
 
@@ -95,9 +210,23 @@ def run():
 
         st.session_state.pp_upload_list = list()
 
-        st.experimental_rerun()
+        st.rerun()
 
     if st.session_state.flag_start:
+
+        task_config = TaskConfig(
+            key_hugging_face=HUGGING_FACE_KEY,
+            key_claude=CLAUDE_KEY,
+            path_wav=os.path.join(DATA_PATH, "wav"),
+            path_db=DATA_PATH,
+            task_language=pp_language,
+            task_prompt=pp_prompt,
+            task_proxy=HTTP_PROXY,
+            pipeline=pp_pipeline,
+            keyword=pp_keyword,
+            summary=pp_summary,
+            view=pp_view
+            )
 
         if (pp_origin and len(st.session_state.pp_url_list) == 0) or (not pp_origin and len(st.session_state.pp_upload_list) == 0):
 
@@ -106,27 +235,21 @@ def run():
         elif pp_origin and len(st.session_state.pp_url_list) > 0:
 
             for web_url in st.session_state.pp_url_list:
-                with st.expander(f"任务链接：{web_url}"):
-                    task_config = TaskConfig(
-                        key_hugging_face=HUGGING_FACE_KEY,
-                        key_claude=CLAUDE_KEY,
-                        ydl_path=LIBRARY_PATH,
-                        task_language=pp_language,
-                        task_prompt=pp_prompt,
-                        pipeline=pp_pipeline,
-                        keyword=pp_keyword,
-                        summary=pp_summary,
-                        view=pp_view,
-                        )
 
+                with st.expander(f"任务链接：{web_url}"):
                     st.caption("1⃣️ 存储音频文件到本地", unsafe_allow_html=False)
                     start_time = time.time()
-                    audio_doc = AudioDocument(audio_web=web_url, audio_url=web_url, audio_origin="网络")
-                    YDL_OPTIONS["outtmpl"] = f"{LIBRARY_PATH}/audio/{audio_doc.uuid}.%(ext)s"
-                    PickpodUtils.pickpod_ytdlp(audio_doc, YDL_OPTIONS)
-                    st.info(f"ℹ️ 音频文件下载完成，用时：{time.time() - start_time} 秒")
+                    audio_draft = AudioDraft(audio_web=web_url, audio_url=web_url, audio_origin="网络")
+                    if task_config.proxy:
+                        YDL_OPTION["proxy"] = task_config.proxy
+                    YDL_OPTION["outtmpl"] = f"{DATA_PATH}/audio/{audio_draft.uuid}.%(ext)s"
+                    try:
+                        PickpodUtils.pickpod_ytdlp(audio_draft, YDL_OPTION)
+                        st.info(f"ℹ️ 音频文件下载完成，用时：{time.time() - start_time} 秒")
+                    except Exception as e:
+                        st.error("音频文件下载失败，已跳过。错误码：{}，错误信息：{}。".format(e.args[0], e.args[-1]))
 
-                    my_task.my_pickpod_task(audio_doc, task_config)
+                    my_pickpod_task(audio_draft, task_config)
 
             PickpodUtils.static_clean()
             st.success("所有音频已转录完成，您可以前往“Gallery”页查看", icon="✅")
@@ -135,30 +258,19 @@ def run():
         elif not pp_origin and len(st.session_state.pp_upload_list) > 0:
 
             for upload_file in st.session_state.pp_upload_list:
-                with st.expander(f"文件名：{upload_file[0]}"):
-                    task_config = TaskConfig(
-                        key_hugging_face=HUGGING_FACE_KEY,
-                        key_claude=CLAUDE_KEY,
-                        ydl_path=LIBRARY_PATH,
-                        task_language=pp_language,
-                        task_prompt=pp_prompt,
-                        pipeline=pp_pipeline,
-                        keyword=pp_keyword,
-                        summary=pp_summary,
-                        view=pp_view,
-                        )
 
+                with st.expander(f"文件名：{upload_file[0]}"):
                     st.caption("1⃣️ 存储音频文件到本地", unsafe_allow_html=False)
                     start_time = time.time()
                     audio_title, audio_ext = os.path.splitext(upload_file[0])
-                    audio_doc = AudioDocument(audio_title=audio_title, audio_ext=audio_ext[1:], audio_origin="本地")
-                    audio_doc.path = f"{LIBRARY_PATH}/audio/{audio_doc.uuid}.{audio_doc.ext}"
-                    with open(audio_doc.path, "wb") as f:
+                    audio_draft = AudioDraft(audio_title=audio_title, audio_ext=audio_ext[1:], audio_origin="本地")
+                    audio_draft.path = f"{DATA_PATH}/audio/{audio_draft.uuid}.{audio_draft.ext}"
+                    with open(audio_draft.path, "wb") as f:
                         f.write(upload_file[1])
-                    audio_doc.length = len(AudioSegment.from_file(audio_doc.path)) / 1000
+                    audio_draft.duration = len(AudioSegment.from_file(audio_draft.path)) / 1000
                     st.info(f"ℹ️ 音频文件下载完成，用时：{time.time() - start_time} 秒")
 
-                    my_task.my_pickpod_task(audio_doc, task_config)
+                    my_pickpod_task(audio_draft, task_config)
 
             PickpodUtils.static_clean()
             st.success("所有音频已转录完成，您可以前往“Gallery”页查看", icon="✅")

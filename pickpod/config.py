@@ -156,5 +156,13 @@ class DBClient(object):
         self.conn.commit()
         return obj
 
+    def fetchall(self, sql: str = "", arg: tuple = tuple()) -> tuple:
+        cur = self.conn.cursor()
+        cur.execute(sql, arg)
+        obj = cur.fetchall()
+        cur.close()
+        self.conn.commit()
+        return obj
+
     def close(self) -> None:
         self.conn.close()

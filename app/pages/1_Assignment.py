@@ -11,10 +11,10 @@ from typing import List
 import requests
 import streamlit as st
 from dotenv import find_dotenv, load_dotenv
-from Home import LIBRARY_PATH
+from Home import DATA_PATH
 
-from pickpod.config import YDL_OPTIONS, TaskConfig
-from pickpod.doc import AudioDocument
+from pickpod.config import YDL_OPTION, TaskConfig
+from pickpod.draft import AudioDraft
 from pickpod.task import PickpodTask
 from pickpod.utils import PickpodUtils
 
@@ -26,16 +26,20 @@ load_dotenv(find_dotenv(), override=True)
 HUGGING_FACE_KEY = os.getenv("HUGGING_FACE_KEY")
 CLAUDE_KEY = os.getenv("CLAUDE_KEY")
 LISTEN_NOTE_KEY = os.getenv("LISTEN_NOTE_KEY")
+HTTP_PROXY = os.getenv("HTTP_PROXY")
 
 
 def my_pickpod_task(pickpod_list: List[PickpodTask]) -> None:
     for pickpod_task in pickpod_list:
-        pickpod_task.pickpod_all_task()
-        pickpod_task.audio_doc.save_as_json(json_path=f"{LIBRARY_PATH}/doc/{pickpod_task.audio_doc.uuid}.json")
+        try:
+            pickpod_task.pickpod_all_task()
+            pickpod_task.save_to_db()
+        except Exception as e:
+            print("Pickpod task failed, CODE: {}, INFO: {}.".format(e.args[0], e.args[-1]))
 
 def task_set(ln_q, ln_sort_by_date=None, ln_num=None, ln_len_min=None, ln_len_max=None, ln_published_before=None, ln_published_after=None, ln_only_in=None, ln_language=None, ln_region=None, ln_safe_mode=None, ln_unique_podcasts=None, pp_start=None, pp_period=None, pp_language=None, pp_prompt=None, pp_pipeline=None, pp_keyword=None, pp_summary=None, pp_view=None) -> None:
     task_dict = {
-        "pp_start": int(datetime.datetime.combine(pp_start, datetime.time()).timestamp()) if pp_start is not None else None,
+        "pp_start": int(datetime.datetime.combine(pp_start, datetime.time()).timestamp()) if pp_start else None,
         "pp_period": pp_period,
         "pp_language": pp_language,
         "pp_prompt": pp_prompt,
@@ -69,7 +73,7 @@ def task_set(ln_q, ln_sort_by_date=None, ln_num=None, ln_len_min=None, ln_len_ma
 st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Assignment",
-    page_icon="../library/logo.png",
+    page_icon="../data/logo.png",
     menu_items={
         "Get Help": "https://github.com/shixiangcap/pickpod",
         "Report a bug": "https://github.com/shixiangcap/pickpod",
@@ -128,14 +132,14 @@ with st.sidebar:
         click_clean = st.button("清除", help="您的配置信息将被清空", on_click=task_set, kwargs=click_dict, use_container_width=True)
 
     if click_save or click_clean:
-        with open(f"{LIBRARY_PATH}/task.json", "w") as f:
+        with open(f"{DATA_PATH}/task.json", "w", encoding="utf-8") as f:
             f.write(json.dumps(st.session_state.task_do, indent=4, separators=(",", ": "), ensure_ascii=False))
 
 st.write("# 定制 Pickpod 周期任务 📒")
 
 if not click_save and not click_do:
 
-    with open(f"{LIBRARY_PATH}/task.json", "r", encoding="utf-8") as f:
+    with open(f"{DATA_PATH}/task.json", "r", encoding="utf-8") as f:
         task_dict = json.load(f)
 
     st.write("#### 已保存的参数选项")
@@ -146,11 +150,11 @@ if not click_save and not click_do:
         st.json(task_dict, expanded=True)
 
     with metric_clean:
-        st.metric("预计每月将消耗的 Listen Notes API 额度", str(len(task_dict.get("ll_list", [])) * ((30 // task_dict.get("pp_period")) if task_dict.get("pp_period") else 0)) + "次", help="测试过程同样将消耗一定数量的额度")
+        st.metric("预计每月将消耗的 Listen Notes API 额度", str(len(task_dict.get("ll_list", list())) * ((30 // task_dict.get("pp_period")) if task_dict.get("pp_period") else 0)) + "次", help="测试过程同样将消耗一定数量的额度")
 
 elif click_save and not click_do and not click_clean:
 
-    with open(f"{LIBRARY_PATH}/task.json", "r", encoding="utf-8") as f:
+    with open(f"{DATA_PATH}/task.json", "r", encoding="utf-8") as f:
         task_dict = json.load(f)
 
     st.write("#### 已保存的参数选项")
@@ -161,11 +165,11 @@ elif click_save and not click_do and not click_clean:
         st.json(task_dict, expanded=True)
 
     with metric_clean:
-        st.metric("预计每月将消耗的 Listen Notes API 额度", str(len(task_dict.get("ll_list", [])) * ((30 // task_dict.get("pp_period")) if task_dict.get("pp_period") else 0)) + "次", help="测试过程同样将消耗一定数量的额度")
+        st.metric("预计每月将消耗的 Listen Notes API 额度", str(len(task_dict.get("ll_list", list())) * ((30 // task_dict.get("pp_period")) if task_dict.get("pp_period") else 0)) + "次", help="测试过程同样将消耗一定数量的额度")
 
     st.write("#### 测试结果")
 
-    for task_ll in task_dict.get("ll_list", []):
+    for task_ll in task_dict.get("ll_list", list()):
         task_resp = requests.request("GET", "https://listen-api.listennotes.com/api/v2/search", headers={"X-ListenAPI-Key": LISTEN_NOTE_KEY}, params=task_ll)
         st.json(task_resp.json(), expanded=False)
 
@@ -173,17 +177,16 @@ elif not click_save and click_do and not click_clean:
 
     task_pp_list = list()
 
-    for task_ll in st.session_state.task_do.get("ll_list", []):
+    for task_ll in st.session_state.task_do.get("ll_list", list()):
         task_resp = requests.request("GET", "https://listen-api.listennotes.com/api/v2/search", headers={"X-ListenAPI-Key": LISTEN_NOTE_KEY}, params=task_ll)
-        if task_resp.json().get("total", 0) < task_ll.get("offset", 0) + task_ll.get("page_size", 0):
-            break
-        for task_results in task_resp.json().get("results", list()):
-            task_pp_list.append(task_results)
+        if task_resp.json().get("total", 0) > task_ll.get("offset", 0):
+            for task_results in task_resp.json().get("results", list()):
+                task_pp_list.append(task_results)
 
     metric_api, metric_task = st.columns([1, 1])
 
     with metric_api:
-        st.metric("本次任务消耗的 Listen Notes API 额度", str(len(st.session_state.task_do.get("ll_list", []))) + "次")
+        st.metric("本次任务消耗的 Listen Notes API 额度", str(len(st.session_state.task_do.get("ll_list", list()))) + "次")
         st.write("#### 任务参数")
         st.json(st.session_state.task_do, expanded=True)
 
@@ -196,29 +199,36 @@ elif not click_save and click_do and not click_clean:
         task_config = TaskConfig(
             key_hugging_face=HUGGING_FACE_KEY,
             key_claude=CLAUDE_KEY,
-            ydl_path=os.path.join(LIBRARY_PATH, "wav"),
+            path_wav=os.path.join(DATA_PATH, "wav"),
+            path_db=DATA_PATH,
             task_language=pp_language,
             task_prompt=pp_prompt,
+            task_proxy=HTTP_PROXY,
             pipeline=pp_pipeline,
             keyword=pp_keyword,
             summary=pp_summary,
             view=pp_view,
             )
 
-        for i, podcast in enumerate(task_pp_list):
+        for podcast in task_pp_list:
             st.json(podcast, expanded=False)
             st.caption("请等待将存储音频文件到本地", unsafe_allow_html=False)
-            audio_doc = AudioDocument(
+            audio_draft = AudioDraft(
                 audio_title=podcast.get("title_original", ""),
                 audio_web=podcast.get("listennotes_url", ""),
                 audio_url=podcast.get("audio", ""),
-                audio_length=podcast.get("audio_length_sec", 0),
+                audio_duration=podcast.get("audio_length_sec", 0),
                 audio_description=re.sub(r"<[^>]*?>", "", podcast.get("description_original", "")),
                 audio_origin="定时")
-            YDL_OPTIONS["outtmpl"] = f"{LIBRARY_PATH}/audio/{audio_doc.uuid}.%(ext)s"
-            PickpodUtils.pickpod_ytdlp(audio_doc, YDL_OPTIONS)
-            st.info(f"ℹ️ 音频文件下载完成")
-            pickpod_list.append(PickpodTask(audio_doc, task_config))
+            if task_config.proxy:
+                YDL_OPTION["proxy"] = task_config.proxy
+            YDL_OPTION["outtmpl"] = f"{DATA_PATH}/audio/{audio_draft.uuid}.%(ext)s"
+            try:
+                PickpodUtils.pickpod_ytdlp(audio_draft, YDL_OPTION)
+                st.info(f"ℹ️ 音频文件下载完成")
+                pickpod_list.append(PickpodTask(audio_draft, task_config))
+            except Exception as e:
+                st.error("音频文件下载失败，已跳过。错误码：{}，错误信息：{}。".format(e.args[0], e.args[-1]))
 
         pickpod_thread = threading.Thread(target=my_pickpod_task, args=(pickpod_list, ))
         pickpod_thread.start()

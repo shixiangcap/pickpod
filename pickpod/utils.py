@@ -87,8 +87,8 @@ class PickpodUtils(object):
             sd = SentenceDraft(
                 sentence_aid=audio_draft.uuid,
                 sentence_content=opencc.OpenCC("t2s").convert(seg.text.strip()),
-                sentence_start=seg.start,
-                sentence_end=seg.end
+                sentence_start=round(seg.start, 3),
+                sentence_end=round(seg.end, 3)
                 )
             if isinstance(sentence_draft, List):
                 sentence_draft.append(sd)
