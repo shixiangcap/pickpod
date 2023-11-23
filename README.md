@@ -182,7 +182,7 @@ task_config = TaskConfig(key_hugging_face=HUGGING_FACE_KEY, pipeline=True)
 pickpod_task = PickpodTask(audio_draft, task_config)
 # Start pickpod task
 pickpod_task.pickpod_with_url()
-# Get the result of pickpod task
+# Print the result of pickpod task
 print(pickpod_task.__dict__)
 ```
 

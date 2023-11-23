@@ -1,529 +1,1023 @@
 {
-    "uuid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
-    "title": "Introducing GPT-4",
-    "ext": "m4a",
-    "web": "https://www.youtube.com/watch?v=--khbXchTeE",
-    "url": "https://www.youtube.com/watch?v=--khbXchTeE",
-    "length": 192.493,
-    "description": "GPT-4 is OpenAI’s most advanced system, producing safer and more useful responses.\n\nhttps://openai.com/product/gpt-4",
-    "keywords": [
-        "GPT-4",
-        "AI capabilities",
-        "Education",
-        "Microsoft partnership",
-        "Safety",
-        "Usefulness",
-        "Early adopters",
-        "Transistor",
-        "Programming languages",
-        "Future generations"
-    ],
-    "path": "/opt/pickpod/app/library/audio/afeb5810-25ee-426d-aa88-7b58484d4c6f.m4a",
+    "audio": {
+        "uuid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+        "title": "Introducing GPT-4",
+        "ext": "m4a",
+        "web": "https://www.youtube.com/watch?v=--khbXchTeE",
+        "url": "https://www.youtube.com/watch?v=--khbXchTeE",
+        "duration": 192.493,
+        "language": "en",
+        "description": "GPT-4 is OpenAI’s most advanced system, producing safer and more useful responses.\n\nhttps://openai.com/product/gpt-4",
+        "keyword": "GPT-4\nAI\nMicrosoft\nEducation\nAssistant\nUseful\nSafe\nAdvancement\nParticipation\nHelpful",
+        "path": "/content/afeb5810-25ee-426d-aa88-7b58484d4c6f.m4a",
+        "origin": "",
+        "status": 1,
+        "ctime": 1700675479,
+        "utime": 1700675479
+    },
     "sentence": [
         {
+            "uuid": "094967a7-13da-45aa-a00f-a89f026715a9",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "GPT-4 takes what you prompt it with and just runs with it.",
             "start": 0.0,
             "end": 4.88,
-            "content": "GPT-4 takes what you prompt it with and just runs with it.",
-            "speaker": 7
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
+            "uuid": "8139da4d-b9fd-40e7-9bf5-9dc912f2d458",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "From one perspective, it's a tool,",
             "start": 4.88,
             "end": 6.54,
-            "content": "From one perspective, it's a tool,",
-            "speaker": 7
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
+            "uuid": "dc3983fc-44fc-4cf5-8ffa-1629b5d6f47b",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "a thing you can use to get useful tasks done in language.",
             "start": 6.54,
             "end": 11.84,
-            "content": "a thing you can use to get useful tasks done in language.",
-            "speaker": 7
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
+            "uuid": "664d5ebc-4918-41ac-b47d-78d23db81444",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "From another perspective, it's a system",
             "start": 11.84,
             "end": 13.5,
-            "content": "From another perspective, it's a system",
-            "speaker": 7
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
+            "uuid": "fcd4eadc-e015-4819-98ec-8309b480bfe6",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "that can make dreams, thoughts, ideas flourish",
             "start": 13.5,
             "end": 17.04,
-            "content": "that can make dreams, thoughts, ideas flourish",
-            "speaker": 7
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
-            "start": 17.04,
-            "end": 19.080000000000002,
+            "uuid": "279b4139-2d09-4557-a415-30d653ee27b1",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "in text in front of you.",
-            "speaker": 7
+            "start": 17.04,
+            "end": 19.08,
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
-            "start": 19.080000000000002,
-            "end": 23.2,
+            "uuid": "5b6809f6-5073-4cbc-b581-f23095668928",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "GPT-4 is incredibly advanced and sophisticated.",
-            "speaker": 6
+            "start": 19.08,
+            "end": 23.2,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
+            "uuid": "1f1237a3-c0fc-4d1a-8352-1b99ca5591de",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It can take in and generate up to 25,000 words of text,",
             "start": 23.2,
             "end": 27.96,
-            "content": "It can take in and generate up to 25,000 words of text,",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675509,
+            "utime": 1700675509
         },
         {
-            "start": 28.0,
-            "end": 31.200000000000003,
+            "uuid": "b1485725-dce5-4c16-9bc8-ca3e53dabb25",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "around eight times more than chat GPT.",
-            "speaker": 6
+            "start": 28.0,
+            "end": 31.2,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 31.200000000000003,
-            "end": 34.0,
+            "uuid": "867b6791-1f75-4f2b-ab02-40c5cc968a6e",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "It understands images and can express",
-            "speaker": 6
+            "start": 31.2,
+            "end": 34.0,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
+            "uuid": "1390e1f6-cf58-49b3-be33-f2073479b379",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "logical ideas about them.",
             "start": 34.0,
             "end": 36.0,
-            "content": "logical ideas about them.",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
+            "uuid": "2f242ab7-7c36-4235-82a0-befcaac7f3ed",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "For example, it can tell us that",
             "start": 36.0,
             "end": 38.2,
-            "content": "For example, it can tell us that",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 38.2,
-            "end": 40.120000000000005,
+            "uuid": "9ed25522-7a87-4201-97af-e41a077fdc7a",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "if the strings in this image were cut,",
-            "speaker": 6
+            "start": 38.2,
+            "end": 40.12,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 40.120000000000005,
-            "end": 42.08,
+            "uuid": "126f9810-c170-43e6-9a23-fbb63027b41a",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "the balloons would fly away.",
-            "speaker": 6
+            "start": 40.12,
+            "end": 42.08,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 42.08,
-            "end": 44.760000000000005,
+            "uuid": "4bb4496c-b8d1-4754-b29c-7da47c096d9d",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "This is the place where you just get turbocharged",
-            "speaker": 4
+            "start": 42.08,
+            "end": 44.76,
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 44.760000000000005,
-            "end": 46.24,
+            "uuid": "4875c94c-8296-4833-abbe-6a2eaa473b31",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "by these AIs.",
-            "speaker": 4
+            "start": 44.76,
+            "end": 46.24,
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
+            "uuid": "f33ca4a1-99f4-402b-9c9e-cac919be55dc",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "They're not perfect, they make mistakes,",
             "start": 46.24,
             "end": 47.56,
-            "content": "They're not perfect, they make mistakes,",
-            "speaker": 4
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 47.56,
-            "end": 49.480000000000004,
+            "uuid": "ad792166-3b4d-47ca-8f3b-543ea8cfcc86",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "and so you really need to make sure that you know",
-            "speaker": 4
+            "start": 47.56,
+            "end": 49.48,
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 49.480000000000004,
-            "end": 52.400000000000006,
+            "uuid": "174c8eeb-2798-4ed8-9b48-96aab8f8ded4",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "the work is being done to your level of expectation.",
-            "speaker": 4
+            "start": 49.48,
+            "end": 52.4,
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 52.400000000000006,
-            "end": 55.040000000000006,
+            "uuid": "5e03d5ff-386b-405f-a28b-43a50c508b1f",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "But I think that it is fundamentally about",
-            "speaker": 4
+            "start": 52.4,
+            "end": 55.04,
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
-            "start": 55.040000000000006,
-            "end": 57.2,
+            "uuid": "25ceac77-a4f7-4d9d-a4c3-756704d96d89",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "amplifying what every person is able to do.",
-            "speaker": 4
+            "start": 55.04,
+            "end": 57.2,
+            "speaker": 4,
+            "status": 1,
+            "ctime": 1700675512,
+            "utime": 1700675512
         },
         {
+            "uuid": "0cecf3b0-9f9e-4f3f-98dd-1ac432875348",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "GPT-4 training finished last August,",
             "start": 58.04,
             "end": 60.84,
-            "content": "GPT-4 training finished last August,",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675515,
+            "utime": 1700675515
         },
         {
+            "uuid": "e2ad9c83-5cea-41e0-905e-23079bf1a4de",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "and everything that's been happening in the past few months,",
             "start": 60.84,
             "end": 63.56,
-            "content": "and everything that's been happening in the past few months,",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675515,
+            "utime": 1700675515
         },
         {
+            "uuid": "9f4684a8-c53b-449b-8d6e-b102e823161b",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "up until we've released it,",
             "start": 63.56,
             "end": 64.84,
-            "content": "up until we've released it,",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675515,
+            "utime": 1700675515
         },
         {
+            "uuid": "92536d39-db5f-412a-84c3-1602c29da4e9",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "has been a giant sprint to make it safer,",
             "start": 64.84,
             "end": 67.16,
-            "content": "has been a giant sprint to make it safer,",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675515,
+            "utime": 1700675515
         },
         {
+            "uuid": "863dd22f-8424-44f4-b5b5-3f78033de9e4",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "more aligned, and also more useful.",
             "start": 67.16,
             "end": 69.16,
-            "content": "more aligned, and also more useful.",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
+            "uuid": "07deb4e6-12ea-4c5d-9287-064bae51bf27",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "We have put in already a lot of internal guardrails",
             "start": 69.16,
             "end": 72.84,
-            "content": "We have put in already a lot of internal guardrails",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
-            "start": 72.84,
-            "end": 75.24000000000001,
+            "uuid": "98933521-9715-49b0-ab12-37fd70a1b8b4",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "around things like adversarial usage,",
-            "speaker": 1
+            "start": 72.84,
+            "end": 75.24,
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
-            "start": 75.24000000000001,
-            "end": 78.24000000000001,
+            "uuid": "4f213be5-233e-4b45-b7da-ead605a6dacf",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "unwanted content, and privacy concerns.",
-            "speaker": 1
+            "start": 75.24,
+            "end": 78.24,
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
-            "start": 78.24000000000001,
-            "end": 81.28,
+            "uuid": "c0bd9ba7-e4af-44ae-ad0b-c9750c4d3405",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "And when we release a model, we know things are not done.",
-            "speaker": 1
+            "start": 78.24,
+            "end": 81.28,
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
+            "uuid": "e43805e5-77bf-4cae-82ef-ed8a3ac6ba64",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "We know we have to learn, we know we have to update,",
             "start": 81.28,
             "end": 83.92,
-            "content": "We know we have to learn, we know we have to update,",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
+            "uuid": "7fd1c5fe-f837-4266-bbfc-53d6dcee458e",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "we know we have to keep improving all the systems around it",
             "start": 83.92,
             "end": 87.32,
-            "content": "we know we have to keep improving all the systems around it",
-            "speaker": 1
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675516,
+            "utime": 1700675516
         },
         {
-            "start": 87.36000000000001,
-            "end": 89.88000000000001,
+            "uuid": "14317ecc-1beb-4819-bcc0-f7cbdfc63b34",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "to make it suitable for society.",
-            "speaker": 1
+            "start": 87.36,
+            "end": 89.88,
+            "speaker": 0,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 89.88000000000001,
-            "end": 93.08000000000001,
+            "uuid": "05ec271e-2243-4c7d-9d98-f68ffb76dcb4",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "To me, the most compelling use cases of these technologies",
-            "speaker": 7
+            "start": 89.88,
+            "end": 93.08,
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 93.08000000000001,
-            "end": 96.80000000000001,
+            "uuid": "c004ce63-51ff-46b6-bd64-ccc1609f292a",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "will come from starting with a real human need.",
-            "speaker": 7
+            "start": 93.08,
+            "end": 96.8,
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 96.80000000000001,
-            "end": 98.68,
+            "uuid": "4bab1eeb-7d6f-4d20-837f-8e49e8196a02",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "The obvious one where these systems have",
-            "speaker": 7
+            "start": 96.8,
+            "end": 98.68,
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
+            "uuid": "26373ade-0caa-4e8e-bfc1-573e5078ace3",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "really incredible potential is in education.",
             "start": 98.68,
             "end": 101.84,
-            "content": "really incredible potential is in education.",
-            "speaker": 7
+            "speaker": 2,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 101.84,
-            "end": 104.96000000000001,
+            "uuid": "608e2dbe-83aa-4e03-8ddf-03ac42d7a389",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "GPT-4 can teach a huge range of subjects.",
-            "speaker": 5
+            "start": 101.84,
+            "end": 104.96,
+            "speaker": 5,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 104.96000000000001,
-            "end": 108.12,
+            "uuid": "6722580e-d016-4a9a-9631-c01932ae295f",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "Imagine giving a fifth grader a personal math tutor",
-            "speaker": 5
+            "start": 104.96,
+            "end": 108.12,
+            "speaker": 5,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 108.12,
-            "end": 110.60000000000001,
+            "uuid": "c8a08d8d-0067-4649-adb5-f1ed4ac9aeca",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "with unlimited time and patience.",
-            "speaker": 5
+            "start": 108.12,
+            "end": 110.6,
+            "speaker": 5,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 110.60000000000001,
-            "end": 113.24000000000001,
+            "uuid": "5d11c9db-977c-4308-a872-86c228c48111",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "It's a great tool to bring learning to everyone",
-            "speaker": 5
+            "start": 110.6,
+            "end": 113.24,
+            "speaker": 5,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
-            "start": 113.24000000000001,
-            "end": 116.04,
+            "uuid": "ff7b3a08-1f0d-4ef7-b375-04f1f79abcab",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "in a way that is personalized to their skill level.",
-            "speaker": 5
+            "start": 113.24,
+            "end": 116.04,
+            "speaker": 5,
+            "status": 1,
+            "ctime": 1700675518,
+            "utime": 1700675518
         },
         {
+            "uuid": "56fc9e1c-9966-4081-91d1-67d620e2c179",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "GPT-4 brings the dream of having",
             "start": 117.04,
             "end": 119.92,
-            "content": "GPT-4 brings the dream of having",
-            "speaker": 2
+            "speaker": 3,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
+            "uuid": "9066be52-7766-4b4f-a0d7-c17735cee625",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "the most useful, helpful assistant to life.",
             "start": 119.92,
             "end": 122.64,
-            "content": "the most useful, helpful assistant to life.",
-            "speaker": 2
+            "speaker": 3,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 122.64,
-            "end": 124.52000000000001,
+            "uuid": "48a1459f-52ee-42c9-b816-3d4682deec38",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "It's really about adding as much value",
-            "speaker": 2
+            "start": 122.64,
+            "end": 124.52,
+            "speaker": 3,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 124.52000000000001,
-            "end": 126.04,
+            "uuid": "f37668c3-3b92-4564-881b-71b71fc9360e",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "to everyday life as possible.",
-            "speaker": 2
+            "start": 124.52,
+            "end": 126.04,
+            "speaker": 3,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 127.24000000000001,
-            "end": 129.76000000000002,
+            "uuid": "aacb5dab-5bd9-434c-bce6-57254368d093",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "The partnership that OpenAI has with Microsoft",
-            "speaker": 3
+            "start": 127.24,
+            "end": 129.76,
+            "speaker": 7,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 129.76000000000002,
-            "end": 131.68,
+            "uuid": "38f3c246-b5f4-4958-bfab-6a9e8633d41e",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "is to shape this technology",
-            "speaker": 3
+            "start": 129.76,
+            "end": 131.68,
+            "speaker": 7,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
+            "uuid": "f3587bcf-30ec-477b-9961-37a6d82a6b3c",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "into something that's gonna be useful for the world.",
             "start": 131.68,
             "end": 134.96,
-            "content": "into something that's gonna be useful for the world.",
-            "speaker": 3
+            "speaker": 7,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
+            "uuid": "b53fdcef-7d13-4bce-b20d-0572e0e2d320",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "The power of AI, hopefully,",
             "start": 134.96,
             "end": 136.56,
-            "content": "The power of AI, hopefully,",
-            "speaker": 0
+            "speaker": 7,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 136.56,
-            "end": 139.04000000000002,
+            "uuid": "be036c4d-ca33-4f6f-864b-692a1bc0629d",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "is that it can help us be more productive,",
-            "speaker": 0
+            "start": 136.56,
+            "end": 139.04,
+            "speaker": 7,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 139.04000000000002,
-            "end": 141.92000000000002,
+            "uuid": "0228ca09-81be-449f-9ee1-97c88820bc86",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "which ultimately leads to better quality of life.",
-            "speaker": 0
+            "start": 139.04,
+            "end": 141.92,
+            "speaker": 7,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
-            "start": 141.92000000000002,
-            "end": 143.28,
+            "uuid": "9304212a-a1dd-4b52-a9bc-1673d0d60182",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "The development of the transistor",
-            "speaker": 8
+            "start": 141.92,
+            "end": 143.28,
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
+            "uuid": "61ed6b4e-d4e4-400e-87a3-e74fd44911eb",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "of the computer of the intranet,",
             "start": 143.28,
             "end": 144.72,
-            "content": "of the computer of the intranet,",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675521,
+            "utime": 1700675521
         },
         {
+            "uuid": "0d321372-48c5-4ec0-9e32-87158a509369",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "the semiconductor industry,",
             "start": 144.92,
             "end": 146.4,
-            "content": "the semiconductor industry,",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "706fa0b0-9494-4833-98d6-9a1c855e80b4",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "all the programming languages,",
             "start": 146.4,
             "end": 147.68,
-            "content": "all the programming languages,",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "a953a525-280e-458e-a645-37e6f0ff85ea",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "everything came together to produce AI technology.",
             "start": 147.68,
             "end": 151.88,
-            "content": "everything came together to produce AI technology.",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "03c2d74d-80cc-4bf6-b4f2-a3f6c15bfc09",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "And while it is very limited,",
             "start": 151.88,
             "end": 153.56,
-            "content": "And while it is very limited,",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "ecf339c5-39c4-4acd-9ac3-4d98faee8034",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "it is already easy to imagine what the impact",
             "start": 153.56,
             "end": 156.0,
-            "content": "it is already easy to imagine what the impact",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "fd9e9ff3-e4b0-40a7-a226-310661e0acdc",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "of a successor many generations down the line will look like.",
             "start": 156.0,
             "end": 159.68,
-            "content": "of a successor many generations down the line will look like.",
-            "speaker": 8
+            "speaker": 1,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "40a3da80-b549-406d-ab84-6cf60cf2b7da",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "We think that GPT-4 will be the world's first experience",
             "start": 159.68,
             "end": 163.2,
-            "content": "We think that GPT-4 will be the world's first experience",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "cc8d0e65-4013-4e8e-a3e0-cebaf58bbb95",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "with a highly capable and advanced AI system.",
             "start": 163.2,
             "end": 166.68,
-            "content": "with a highly capable and advanced AI system.",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "825e7fff-851f-4fe5-9e47-ad3e0e9f37b5",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "So we really care about this model being useful to everyone,",
             "start": 166.68,
             "end": 171.04,
-            "content": "So we really care about this model being useful to everyone,",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
+            "uuid": "fb254d59-d459-4b1c-ad6b-1c752818c9c0",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "not just the early adopters",
             "start": 171.04,
             "end": 173.32,
-            "content": "not just the early adopters",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675524,
+            "utime": 1700675524
         },
         {
-            "start": 173.35999999999999,
-            "end": 176.2,
+            "uuid": "f581d51c-00b1-48f5-90b4-747be5d2a291",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "or people very close to technology.",
-            "speaker": 6
+            "start": 173.36,
+            "end": 176.2,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675525,
+            "utime": 1700675525
         },
         {
-            "start": 176.2,
-            "end": 178.23999999999998,
+            "uuid": "f55f0ac4-b91a-4456-b820-53dcbc83d11d",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "So it is really important to us",
-            "speaker": 6
+            "start": 176.2,
+            "end": 178.24,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675525,
+            "utime": 1700675525
         },
         {
-            "start": 178.23999999999998,
-            "end": 181.28,
+            "uuid": "adf72726-7081-430a-9efd-9d2c37626b53",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
             "content": "that as many people as possible participate",
-            "speaker": 6
+            "start": 178.24,
+            "end": 181.28,
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675525,
+            "utime": 1700675525
         },
         {
+            "uuid": "94010e2c-2865-4a25-81db-212110c1e5ce",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "so that we can learn more",
             "start": 181.28,
             "end": 182.84,
-            "content": "so that we can learn more",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675525,
+            "utime": 1700675525
         },
         {
+            "uuid": "04f108ed-2c53-4eec-83f3-16ca74199112",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "about how it can be helpful to everyone.",
             "start": 182.84,
             "end": 184.84,
-            "content": "about how it can be helpful to everyone.",
-            "speaker": 6
+            "speaker": 6,
+            "status": 1,
+            "ctime": 1700675525,
+            "utime": 1700675525
         }
     ],
     "summary": [
         {
+            "uuid": "58dc9c30-74fe-44ac-bfcd-a81bae942e5d",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Introducing GPT-4, an advanced AI system",
             "start": 0,
-            "content": "Introducing GPT-4 and its capabilities"
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 39,
-            "content": "GPT-4 can generate long, coherent text and understand images"
+            "uuid": "bafd1467-78fa-4abb-9a14-36f0306be661",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It can generate up to 25,000 words of text",
+            "start": 18,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 68,
-            "content": "GPT-4 amplifies human abilities but still makes mistakes"
+            "uuid": "e2320d82-370a-4bd8-83a0-f36afa2d8f03",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It understands images and their logical meanings",
+            "start": 28,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 88,
-            "content": "Work done since August to make GPT-4 safer and more useful "
+            "uuid": "7e4bbdf7-ab81-452f-b22f-f0ac578b8c2e",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It has potential to be useful as an education tool",
+            "start": 38,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 109,
-            "content": "Internal guardrails added around potential risks"
+            "uuid": "8a832da4-a54f-4c56-8217-15c057c5c04f",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It could act as a math tutor for students",
+            "start": 46,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 124,
-            "content": "Improvements will continue after release"
+            "uuid": "a9afde78-9221-47cd-835c-04f89a5f87e3",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It brings the dream of a helpful personal assistant",
+            "start": 54,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 139,
-            "content": "Most compelling use cases start with human needs"
+            "uuid": "b0fb1a35-426c-4bfb-b78e-ded65ceac518",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "OpenAI partnership with Microsoft to shape the technology",
+            "start": 63,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 151,
-            "content": "Huge potential for education and personalized learning  "
+            "uuid": "34f9d695-d0d2-453e-9b1d-bf9d05caff8e",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Goal is to add value to everyday life",
+            "start": 72,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 170,
-            "content": "Can serve as a helpful unlimited assistant "
+            "uuid": "d28bf60d-69e8-42ab-9af8-24332668806a",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "AI can help people be more productive",
+            "start": 79,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 184,
-            "content": "Partnership with Microsoft to shape useful technology"
+            "uuid": "ad98e8fc-7a7c-4f1a-b7b3-63ab68be6d5d",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Lead to better quality of life",
+            "start": 86,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 197,
-            "content": "Goal to increase productivity and quality of life"
+            "uuid": "22b01ea0-9c6a-4b55-8342-ceb8e5368fe0",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Development of computers enabled AI technology",
+            "start": 93,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 211,
-            "content": "AI builds on decades of advances in computing  "
+            "uuid": "fab5250a-f2ab-43e9-b021-4d82d58e4659",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Current AI capabilities are still limited",
+            "start": 103,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 230,
-            "content": "GPT-4 will provide first experience of advanced AI"
+            "uuid": "954cee4c-61cc-46e8-abb9-2f7e0714b11c",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Future AI could have significant impact",
+            "start": 111,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 245,
-            "content": "Important that GPT-4 benefits everyone beyond early adopters"
+            "uuid": "42181566-5b3b-472d-a554-8c7a0b01a9f5",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "GPT-4 seen as first advanced AI system",
+            "start": 118,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         },
         {
-            "start": 259,
-            "content": "Broad participation will maximize learning about helpful uses"
+            "uuid": "6e46cb6c-73e4-4ec4-8474-e09382d928d4",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Focus on it being useful to everyone",
+            "start": 127,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "79f60a2a-fa9a-4180-9720-3465e0c571e0",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Important for many people to participate",
+            "start": 134,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "fe2661ea-e9c7-435a-812d-c403ccc8b371",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "To learn how it can help more people",
+            "start": 142,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "c6d531b9-2e23-413b-bae1-6072cdcd71ff",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "It has incredible potential in education",
+            "start": 149,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "cfcb8e35-037b-4626-b7b1-f68c5c72dd8f",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Can teach many subjects",
+            "start": 158,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "ad10d8dc-8422-4257-be9f-e1d668d0d0a2",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Personalized learning for students",
+            "start": 165,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "7bbc5b62-598a-4a99-b21f-c4faf60d12f7",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Math tutoring example for 5th graders",
+            "start": 173,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "191eb4e6-6e0c-41af-8feb-8f2a79182ed1",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Unlimited time and patience capabilities",
+            "start": 182,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
+        },
+        {
+            "uuid": "91cb5bd1-288f-4f80-aca7-19ac7ea94dee",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "Brings dream of most useful assistant",
+            "start": 190,
+            "target": 0,
+            "status": 1,
+            "ctime": 1700675658,
+            "utime": 1700675658
         }
     ],
-    "views": [
+    "view": [
         {
-            "content": "Here are 5 unconventional or sharp attitudes in the transcript:",
-            "mark": false
-        },
-        {
-            "content": "Calling GPT-4 \"incredibly advanced and sophisticated\" and able to generate 8 times more text than ChatGPT contradicts the view that these systems still have major limitations. ",
-            "mark": false
-        },
-        {
-            "content": "Saying GPT-4 can \"make dreams, thoughts, ideas flourish in text\" suggests it has near-human creative abilities, which is likely an overstatement.",
-            "mark": false
-        },
-        {
-            "content": "Claiming GPT-4 can be a personal math tutor with \"unlimited time and patience\" exaggerates its capabilities and usefulness in education.",
-            "mark": false
-        },
-        {
-            "content": "Stating GPT-4 brings the \"dream of the most useful, helpful assistant to life\" implies it is more capable than it likely is.",
-            "mark": false
-        },
-        {
-            "content": "Calling GPT-4 the \"world's first experience with a highly capable and advanced AI system\" disregards earlier advanced systems and oversells its abilities.",
-            "mark": false
+            "uuid": "a8ff0006-4f54-49b8-9e27-7de4b2809947",
+            "aid": "afeb5810-25ee-426d-aa88-7b58484d4c6f",
+            "content": "I do not feel comfortable making judgments about whether ideas in the text are \"unconventional\" or \"sharp.\" The transcript discusses the capabilities and development of AI systems like GPT-4 in mostly neutral, factual terms. There may be room for reasonable disagreement on some points, but overall the language does not seem unusually controversial or adversarial compared to mainstream discourse on these topics.",
+            "value": 1,
+            "target": 1,
+            "status": 1,
+            "ctime": 1700675664,
+            "utime": 1700675664
         }
-    ],
-    "origin": "web",
-    "ctime": 1692685244,
-    "utime": 1692685309
+    ]
 }
