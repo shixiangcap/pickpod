@@ -170,7 +170,7 @@ elif click_save and not click_do and not click_clean:
     st.write("#### 测试结果")
 
     for task_ll in task_dict.get("ll_list", list()):
-        task_resp = requests.request("GET", "https://listen-api.listennotes.com/api/v2/search", headers={"X-ListenAPI-Key": LISTEN_NOTE_KEY}, params=task_ll)
+        task_resp = requests.request("GET", "https://listen-api.listennotes.com/api/v2/search", headers={"X-ListenAPI-Key": LISTEN_NOTE_KEY}, params=task_ll, proxies={"http": HTTP_PROXY, "https": HTTP_PROXY} if HTTP_PROXY else None)
         st.json(task_resp.json(), expanded=False)
 
 elif not click_save and click_do and not click_clean:
@@ -178,7 +178,7 @@ elif not click_save and click_do and not click_clean:
     task_pp_list = list()
 
     for task_ll in st.session_state.task_do.get("ll_list", list()):
-        task_resp = requests.request("GET", "https://listen-api.listennotes.com/api/v2/search", headers={"X-ListenAPI-Key": LISTEN_NOTE_KEY}, params=task_ll)
+        task_resp = requests.request("GET", "https://listen-api.listennotes.com/api/v2/search", headers={"X-ListenAPI-Key": LISTEN_NOTE_KEY}, params=task_ll, proxies={"http": HTTP_PROXY, "https": HTTP_PROXY} if HTTP_PROXY else None)
         if task_resp.json().get("total", 0) > task_ll.get("offset", 0):
             for task_results in task_resp.json().get("results", list()):
                 task_pp_list.append(task_results)

@@ -160,6 +160,10 @@ class PickpodTask(object):
             "view": [x.__dict__ for x in self.view_draft]
         }
 
+    @property
+    def __str__(self) -> str:
+        return "\n".join([f"Speaker {x.speaker} (from {s2t(x.start)} to {s2t(x.end)}): {x.content}" for x in self.sentence_merge()])
+
     def save_to_json(self, json_path: str = "", use_title: bool = False) -> None:
         if not json_path:
             json_path = f"{self.audio_safe_name()}.json" if use_title else f"{self.audio_draft.uuid}.json"
@@ -170,7 +174,7 @@ class PickpodTask(object):
         if not txt_path:
             txt_path = f"{self.audio_safe_name()}.txt" if use_title else f"{self.audio_draft.uuid}.txt"
         with open(txt_path, "w", encoding="utf-8") as f:
-            f.write("\n".join([f"Speaker {x.speaker} (from {s2t(x.start)} to {s2t(x.end)}): {x.content}" for x in self.sentence_merge()]))
+            f.write(self.__str__)
 
     def save_to_db(self) -> None:
         db_client = DBClient(self.task_config.path_db)

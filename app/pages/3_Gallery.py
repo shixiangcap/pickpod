@@ -8,8 +8,10 @@ from datetime import datetime
 import streamlit as st
 from Home import DATA_PATH, index, wiki_gallery
 
-from pickpod.config import DBClient
-from pickpod.draft import AudioDraft, SentenceDraft, SummaryDraft, ViewDraft
+from pickpod.api import s2t
+from pickpod.config import DBClient, TaskConfig
+from pickpod.draft import AudioDraft, SentenceDraft, SummaryDraft, ViewDraft, WikiDraft
+from pickpod.task import PickpodTask
 
 
 os.chdir(os.path.split(os.path.realpath(__file__))[0])
@@ -29,6 +31,27 @@ st.set_page_config(
 
 if "pp_search" not in st.session_state:
     st.session_state.pp_search = False
+    st.session_state.pp_start = 0
+    st.session_state.pp_set = False
+
+df_name = st.experimental_get_query_params().get("uuid")
+
+if df_name:
+
+    audio_draft: AudioDraft = AudioDraft.db_init([PPDB.fetchone(x, y) for x, y in [
+        AudioDraft.select_by_uuid(df_name[0])
+        ]][0])
+
+    pickpod_task = PickpodTask(audio_draft, TaskConfig())
+    pickpod_task.sentence_draft = [SentenceDraft.db_init(sd) for sd in [
+        PPDB.fetchall(x, y) for x, y in [SentenceDraft.select_by_aid(audio_draft.uuid)]
+        ][0]]
+    pickpod_task.summary_draft = [SummaryDraft.db_init(sd) for sd in [
+        PPDB.fetchall(x, y) for x, y in [SummaryDraft.select_by_aid(audio_draft.uuid)]
+        ][0]]
+    pickpod_task.view_draft = [ViewDraft.db_init(sd) for sd in [
+        PPDB.fetchall(x, y) for x, y in [ViewDraft.select_by_aid(audio_draft.uuid)]
+        ][0]]
 
 with st.sidebar:
 
@@ -129,45 +152,112 @@ with st.sidebar:
     pp_return = st.button("返回", help="返回首页", use_container_width=True)
     if pp_return:
         st.session_state.pp_search = False
+        st.experimental_set_query_params()
         st.rerun()
+
+    if df_name:
+        st.header(f"{audio_draft.origin}任务摘要", help="从选择的段落开始播放")
+        df_start = min(int(st.radio("摘要", pickpod_task.summary_draft, format_func=lambda x: x.content, captions=[s2t(sd.start) for sd in pickpod_task.summary_draft], label_visibility="collapsed").start), int(audio_draft.duration))
+        st.session_state.pp_start = st.session_state.pp_start if st.session_state.pp_set else df_start
 
 
 st.write("# 查看 Pickpod 文稿详情 🔎")
-
-df_name = st.experimental_get_query_params().get("uuid")
 
 with open(f"{DATA_PATH}/task.json", "r", encoding="utf-8") as f:
     df_wiki = json.load(f)
 
 if df_name:
 
-    st.caption("1⃣️ 音频文件信息", unsafe_allow_html=False)
-    st.json(AudioDraft.db_init([
-        PPDB.fetchone(x, y) for x, y in [
-            AudioDraft.select_by_uuid(df_name[0])
-            ]
-        ][0]).__dict__)
+    st.caption("标题")
 
-    st.caption("2⃣️ 音频文件文稿", unsafe_allow_html=False)
-    st.json([SentenceDraft.db_init(sd).__dict__ for sd in [
-        PPDB.fetchall(x, y) for x, y in [
-            SentenceDraft.select_by_aid(df_name[0])
-            ]
-        ][0]], expanded=False)
+    st.markdown(f"##### {audio_draft.title}")
 
-    st.caption("3⃣️ 音频文件文稿摘要", unsafe_allow_html=False)
-    st.json([SummaryDraft.db_init(sd).__dict__ for sd in [
-        PPDB.fetchall(x, y) for x, y in [
-            SummaryDraft.select_by_aid(df_name[0])
-            ]
-        ][0]], expanded=False)
+    with open(audio_draft.path, "rb") as f:
+        audio_bytes = f.read()
 
-    st.caption("4⃣️ 音频文件表述观点", unsafe_allow_html=False)
-    st.json([ViewDraft.db_init(sd).__dict__ for sd in [
-        PPDB.fetchall(x, y) for x, y in [
-            ViewDraft.select_by_aid(df_name[0])
-            ]
-        ][0]], expanded=False)
+    st.audio(audio_bytes, format=f"audio/mp4", start_time=st.session_state.pp_start)
+    st.session_state.pp_start = 0
+    st.session_state.pp_set = False
+
+    col_download, col_web = st.columns([1, 1])
+
+    with col_download:
+        st.download_button("导出音频", audio_bytes, f"{pickpod_task.audio_safe_name()}.{audio_draft.ext}", help="下载以标题命名的音频文件", use_container_width=True)
+
+    with col_web:
+        st.link_button("前往原始链接", audio_draft.web, help="查看原始网页", disabled=False if audio_draft.web else True, use_container_width=True)
+
+    st.caption("关键词")
+
+    st.markdown("; ".join(audio_draft.keyword.split("\n")))
+
+    st.caption("描述")
+
+    st.markdown(audio_draft.description)
+
+    with st.expander(f"**语言代码**：{audio_draft.language}（[{audio_draft.url}]({audio_draft.url})）"):
+
+        st.caption("观点交互", help="请评价由音频中提取出的若干条观点对您的价值")
+
+        wiki_add = [True for _ in pickpod_task.view_draft]
+
+        for i, vd in enumerate(pickpod_task.view_draft):
+            col_views_content, col_views_mark = st.columns([6, 1])
+            with col_views_content:
+                wiki_add[i] = st.checkbox(vd.content, wiki_add[i], f"checkbox_{vd.uuid}")
+            with col_views_mark:
+                vd.value = st.toggle("是否有效", wiki_add[i] and vd.value, f"toggle_{vd.uuid}")
+
+        wiki_save = st.button("保存到知识库", "已勾选的指定观点表述将被保存到您的知识库集合", use_container_width=True)
+        if wiki_save:
+            for x, y in [
+                WikiDraft(
+                    wiki_aid=vd.aid, wiki_content=vd.content, wiki_value=vd.value
+                    ).insert() for i, vd in enumerate(pickpod_task.view_draft) if wiki_add[i]
+                ]:
+                PPDB.execute(x, y)
+            st.success("您勾选的观点已被保存到知识库集合。", icon="✅")
+
+        for x, y in [z.update() for z in pickpod_task.view_draft]:
+            PPDB.execute(x, y)
+
+        col_duration, col_ext = st.columns([1, 1])
+        with col_duration:
+            st.markdown(f"**音频时长**：{audio_draft.duration} 秒")
+        with col_ext:
+            st.markdown(f"**音频格式**：{audio_draft.ext.upper()}")
+
+        col_ctime, col_utime = st.columns([1, 1])
+        with col_ctime:
+            st.markdown(f'''**任务创建时间**：{datetime.fromtimestamp(audio_draft.ctime).strftime("%Y-%m-%d %H:%M:%S")}''')
+        with col_utime:
+            st.markdown(f'''**任务更新时间**：{datetime.fromtimestamp(audio_draft.utime).strftime("%Y-%m-%d %H:%M:%S")}''')
+
+    st.caption("文稿")
+
+    for sd in pickpod_task.sentence_merge():
+
+        st.markdown(f"**说话人**：{sd.speaker}（{s2t(sd.start)} -> {s2t(sd.end)}）")
+
+        col_content, col_set = st.columns([9, 1])
+        with col_content:
+            st.markdown(sd.content)
+        with col_set:
+            if st.button("定位", key=sd.uuid, help="从此段落开始播放", use_container_width=True):
+                st.session_state.pp_start = min(int(sd.start), int(audio_draft.duration))
+                st.session_state.pp_set = True
+                st.rerun()
+
+    col_json, col_txt, col_edit = st.columns([1, 1, 1])
+
+    with col_json:
+        st.download_button("导出JSON", json.dumps(pickpod_task.__dict__, indent=4, separators=(",", ": "), ensure_ascii=False), f"{pickpod_task.audio_safe_name()}.json", use_container_width=True)
+
+    with col_txt:
+        st.download_button("导出文稿", pickpod_task.__str__, f"{pickpod_task.audio_safe_name()}.txt", use_container_width=True)
+
+    with col_edit:
+        st.link_button("前往编辑", f"/Editor?uuid={audio_draft.uuid}", help="编辑任务内容", use_container_width=True)
 
 else:
 
