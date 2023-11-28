@@ -66,7 +66,7 @@ def my_pickpod_task(audio_draft: AudioDraft, task_config: TaskConfig):
             if not sd:
                 break
             sentence_draft.append(sd)
-            sentence_bar.progress(sd.end / audio_draft.duration, text=f"已转录{sd.end / audio_draft.duration * 100}%，内容：（{sd.start}s -> {sd.end}s）{sd.content}")
+            sentence_bar.progress(sd.end / audio_draft.duration, text=f"已转录{round(sd.end / audio_draft.duration * 100, 2)}%，内容：（{sd.start}s -> {sd.end}s）{sd.content}")
         task_thread.join()
         task_config.language = task_config.language if task_config.language else audio_draft.language
         sentence_bar.progress(1.0, text="已转录100%")

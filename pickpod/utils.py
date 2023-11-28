@@ -68,7 +68,7 @@ class PickpodUtils(object):
             audio_draft.duration = len(AudioSegment.from_file(audio_draft.path)) / 1000
 
     @staticmethod
-    def pickpod_whisper(audio_draft: AudioDraft, task_language: str = None, task_prompt: str = None, sentence_draft: Queue or List = None, model_file: str = "large-v2") -> float:
+    def pickpod_whisper(audio_draft: AudioDraft, task_language: str = None, task_prompt: str = None, sentence_draft: Queue or List = None, model_file: str = "large-v3") -> float:
         """
         Get audio document with faster_whisper
         """

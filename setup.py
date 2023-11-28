@@ -14,11 +14,11 @@ URL = "https://github.com/shixiangcap/pickpod"
 EMAIL = "it@shixiangcap.com"
 AUTHOR = "shixiangcap"
 REQUIRES_PYTHON = ">=3.8.0"
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "faster_whisper>=0.9.0",
+    "faster_whisper>=0.10.0",
     "opencc-python-reimplemented>=0.1.7",
     "pyannote.audio>=3.0.0",
     "pydub>=0.25.1",
