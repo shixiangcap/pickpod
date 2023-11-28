@@ -237,7 +237,11 @@ If you need **`Pickpod`** to pick up podcasts based on your private wiki, the pr
 
 <img src="https://github.com/shixiangcap/pickpod/assets/41248645/7b3c3ed0-1869-4d1c-9a48-7e6d1b016843" width=100%/>
 
-### A complete transcription result of a audio file
+### A display of a **`Pickpod`** task with many information and features
+
+<img src="https://github.com/shixiangcap/pickpod/assets/41248645/ec4bf99b-5711-4cc1-b565-35c11e9f0bb4" width=100%/>
+
+### A complete transcription result of an audio file
 
 If the target `YouTube` video is [Introducing GPT-4](https://www.youtube.com/watch?v=--khbXchTeE), the **`Pickpod`** can get the `JSON` file [afeb5810-25ee-426d-aa88-7b58484d4c6f.json](./examples/afeb5810-25ee-426d-aa88-7b58484d4c6f.json)
 
