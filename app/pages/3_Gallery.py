@@ -58,8 +58,8 @@ with st.sidebar:
     st.header("搜索 Pickpod")
 
     pp_q = st.text_input("关键词", help="您输入的关键词将被逐字匹配")
-    pp_uuid_min = PPDB.fetchone(AudioDraft.sort_by_ctime(0))[0]
-    pp_uuid_max = PPDB.fetchone(AudioDraft.sort_by_ctime(1))[0]
+    pp_uuid_min = PPDB.fetchone(AudioDraft.sort_by_ctime(0))[0] if PPDB.fetchone(AudioDraft.sort_by_ctime(0)) else 0
+    pp_uuid_max = PPDB.fetchone(AudioDraft.sort_by_ctime(1))[0] if PPDB.fetchone(AudioDraft.sort_by_ctime(1)) else int(datetime.now().timestamp())
     pp_date = st.date_input("时间段", [datetime.fromtimestamp(pp_uuid_min), datetime.fromtimestamp(pp_uuid_max)], datetime.fromtimestamp(pp_uuid_min), datetime.fromtimestamp(pp_uuid_max), help="请选择 Pickpod 任务的创建时间范围", format="YYYY.MM.DD")
     pp_range = st.multiselect("匹配的字段范围", [["标题", "title"], ["描述", "description"], ["关键词", "keyword"], ["正文", "sentence"]], [["标题", "title"], ["描述", "description"], ["关键词", "keyword"], ["正文", "sentence"]], format_func=lambda x: x[0], help="若选择的内容为空，则意味着在所有字段中搜索")
     pp_search = st.button("开始搜索", help="Pickpod 将按照您的要求在库中搜索，这将花费一定时间", use_container_width=True)
