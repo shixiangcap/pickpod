@@ -132,7 +132,6 @@ def wiki_gallery(pp_db: DBClient = PPDB) -> None:
 
 def run() -> None:
 
-    st.experimental_set_query_params()
     st.set_page_config(
         page_title="Pickpod Home",
         page_icon="./data/logo.png",

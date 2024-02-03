@@ -70,7 +70,6 @@ def task_set(ln_q, ln_sort_by_date=None, ln_num=None, ln_len_min=None, ln_len_ma
     st.session_state.task_do = task_dict
 
 
-st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Assignment",
     page_icon="../data/logo.png",

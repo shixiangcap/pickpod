@@ -34,12 +34,12 @@ with st.sidebar:
 
 st.write("# 修改 Pickpod 任务结果 📝")
 
-df_name = st.experimental_get_query_params().get("uuid")
+df_name = st.query_params.to_dict().get("uuid")
 
 if df_name:
 
     audio_draft: AudioDraft = AudioDraft.db_init([PPDB.fetchone(x, y) for x, y in [
-        AudioDraft.select_by_uuid(df_name[0])
+        AudioDraft.select_by_uuid(df_name)
         ]][0])
 
     db_sql = list()

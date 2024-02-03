@@ -34,12 +34,12 @@ if "pp_search" not in st.session_state:
     st.session_state.pp_start = 0
     st.session_state.pp_set = False
 
-df_name = st.experimental_get_query_params().get("uuid")
+df_name = st.query_params.to_dict().get("uuid")
 
 if df_name:
 
     audio_draft: AudioDraft = AudioDraft.db_init([PPDB.fetchone(x, y) for x, y in [
-        AudioDraft.select_by_uuid(df_name[0])
+        AudioDraft.select_by_uuid(df_name)
         ]][0])
 
     pickpod_task = PickpodTask(audio_draft, TaskConfig())
@@ -147,15 +147,15 @@ with st.sidebar:
                     ]],
                 label_visibility="collapsed"
                 )
-            st.button("前往", key=f"{audio_time}_button", on_click=st.experimental_set_query_params, kwargs=dict(uuid=audio_params), use_container_width=True)
+            st.button("前往", key=f"{audio_time}_button", on_click=lambda x: exec("st.query_params.uuid = x if x else str()"), kwargs=dict(x=audio_params), use_container_width=True)
 
     pp_return = st.button("返回", help="返回首页", use_container_width=True)
     if pp_return:
         st.session_state.pp_search = False
-        st.experimental_set_query_params()
+        st.query_params.clear()
         st.rerun()
 
-    if df_name:
+    if df_name and pickpod_task.summary_draft:
         st.header(f"{audio_draft.origin}任务摘要", help="从选择的段落开始播放")
         df_start = min(int(st.radio("摘要", pickpod_task.summary_draft, format_func=lambda x: x.content, captions=[s2t(sd.start) for sd in pickpod_task.summary_draft], label_visibility="collapsed").start), int(audio_draft.duration))
         st.session_state.pp_start = st.session_state.pp_start if st.session_state.pp_set else df_start

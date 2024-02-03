@@ -26,7 +26,6 @@ CLAUDE_KEY = os.getenv("CLAUDE_KEY")
 HTTP_PROXY = os.getenv("HTTP_PROXY")
 
 
-st.experimental_set_query_params()
 st.set_page_config(
     page_title="Pickpod Transcribe",
     page_icon="../data/logo.png",
